@@ -23,7 +23,7 @@ public class KeepsController : ControllerBase
   [HttpGet("{keepId}")]
   public ActionResult<Keep> GetKeepById(int keepId)
   {
-    try { return Ok(keepsService.GetKeepById(keepId)); }
+    try { return Ok(keepsService.GetKeepById(keepId, false)); }
     catch (Exception e) { return BadRequest(e.Message); }
   }
 

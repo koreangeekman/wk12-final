@@ -4,11 +4,13 @@ public class VaultKeepsService
 {
   private readonly VaultKeepsRepo vaultKeepsRepo;
   private readonly VaultsRepo vaultsRepo;
+  private readonly KeepsRepo keepsRepo;
 
-  public VaultKeepsService(VaultKeepsRepo _vaultKeepsRepo, VaultsRepo _vaultsRepo)
+  public VaultKeepsService(VaultKeepsRepo _vaultKeepsRepo, VaultsRepo _vaultsRepo, KeepsRepo _keepsRepo)
   {
     vaultKeepsRepo = _vaultKeepsRepo;
     vaultsRepo = _vaultsRepo;
+    keepsRepo = _keepsRepo;
   }
 
   internal VaultKeep GetVaultKeepById(int vaultKeepId)
@@ -18,7 +20,9 @@ public class VaultKeepsService
   {
     Vault vault = vaultsRepo.GetVaultById(vaultKeepData.VaultId);
     if (vault.CreatorId != vaultKeepData.CreatorId) { throw new Exception("Not your vault to add to!"); }
-    return vaultKeepsRepo.CreateVaultKeep(vaultKeepData);
+    VaultKeep vaultKeep = vaultKeepsRepo.CreateVaultKeep(vaultKeepData);
+    // keepsRepo.AddKeptCount();
+    return vaultKeep;
   }
 
   internal string DeleteVaultKeep(string creatorId, int vaultKeepId)

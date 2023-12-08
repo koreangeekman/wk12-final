@@ -68,7 +68,9 @@ public class KeepsRepo
         SET
           name = @Name,
           description = @Description,
-          img = @Img
+          img = @Img,
+          views = @Views,
+          kept = @Kept
         WHERE id = @Id;
         
         SELECT 
