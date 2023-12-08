@@ -9,10 +9,6 @@ public class VaultsService
     vaultsRepo = _vaultsRepo;
   }
 
-
-  internal List<Vault> GetVaultsByAccount(string creatorId)
-  { return vaultsRepo.GetVaultsByAccount(creatorId); }
-
   internal Vault GetVaultById(int vaultId)
   { return vaultsRepo.GetVaultById(vaultId) ?? throw new Exception("Unable to locate by Id: " + vaultId); }
 

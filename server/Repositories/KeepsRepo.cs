@@ -21,6 +21,9 @@ public class KeepsRepo
   internal Keep GetKeepById(int keepId)
   { return db.QueryFirstOrDefault<Keep>("SELECT * FROM keeps WHERE id = @KeepId;", new { keepId }); }
 
+  internal List<Keep> GetKeepsByProfileId(string accountId)
+  { return db.Query<Keep>("SELECT * FROM keeps WHERE creatorId = @AccountId;", new { accountId }).ToList(); }
+
   internal List<Keep> GetKeepsByQuery(string query)
   { return db.Query<Keep>("SELECT * FROM keeps WHERE name OR description LIKE @Query;", new { query }).ToList(); }
 

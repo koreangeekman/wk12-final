@@ -14,11 +14,11 @@ public class VaultsRepo
     return 2;
   }
 
-  internal List<Vault> GetVaultsByAccount(string creatorId)
-  { return db.Query<Vault>("SELECT * FROM vaults WHERE creatorId = @CreatorId;", new { creatorId }).ToList(); }
-
   internal Vault GetVaultById(int vaultId)
   { return db.QueryFirstOrDefault<Vault>("SELECT * FROM vaults WHERE id = @VaultId;", new { vaultId }); }
+
+  internal List<Vault> GetVaultsByProfileId(string creatorId)
+  { return db.Query<Vault>("SELECT * FROM vaults WHERE creatorId = @CreatorId;", new { creatorId }).ToList(); }
 
   internal Vault CreateVault(Vault vaultData)
   {
