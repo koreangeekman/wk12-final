@@ -13,10 +13,50 @@ public class VaultsController : ControllerBase
     vaultsService = _vaultsService;
   }
 
-  // [HttpGet]
-  // public ActionResult<List<VaultsController>> GetVaults()
-  // {
-  //   try { return Ok(vaultsService.GetVaults()); }
-  //   catch (Exception e) { return BadRequest(e.Message); }
-  // }
+  [HttpGet("{vaultId}")]
+  public ActionResult<Vault> GetVaultById(int vaultId)
+  {
+    try { return Ok(vaultsService.GetVaultById(vaultId)); }
+    catch (Exception e) { return BadRequest(e.Message); }
+  }
+
+  [Authorize]
+  [HttpPost]
+  public async Task<ActionResult<Vault>> CreateVault(Vault vaultData)
+  {
+    try
+    {
+      Account userInfo = await a0.GetUserInfoAsync<Account>(HttpContext);
+      vaultData.CreatorId = userInfo.Id;
+      return Ok(vaultsService.CreateVault(vaultData));
+    }
+    catch (Exception e) { return BadRequest(e.Message); }
+  }
+
+  [Authorize]
+  [HttpPut("{vaultId}")]
+  public async Task<ActionResult<Vault>> EditVault(int vaultId, Vault vaultData)
+  {
+    try
+    {
+      Account userInfo = await a0.GetUserInfoAsync<Account>(HttpContext);
+      vaultData.CreatorId = userInfo.Id;
+      vaultData.Id = vaultId;
+      return Ok(vaultsService.EditVault(vaultData));
+    }
+    catch (Exception e) { return BadRequest(e.Message); }
+  }
+
+  [Authorize]
+  [HttpDelete("{vaultId}")]
+  public async Task<ActionResult<Vault>> DeleteVault(int vaultId)
+  {
+    try
+    {
+      Account userInfo = await a0.GetUserInfoAsync<Account>(HttpContext);
+      return Ok(vaultsService.DeleteVault(userInfo.Id, vaultId));
+    }
+    catch (Exception e) { return BadRequest(e.Message); }
+  }
+
 }

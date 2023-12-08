@@ -40,8 +40,8 @@ public class Startup
     services.AddScoped<KeepsRepo>();
     services.AddScoped<KeepsService>();
 
-    // services.AddScoped<VaultsRepo>();
-    // services.AddScoped<VaultsService>();
+    services.AddScoped<VaultsRepo>();
+    services.AddScoped<VaultsService>();
 
     // services.AddScoped<VaultKeepsRepo>();
     // services.AddScoped<VaultKeepsService>();
