@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark px-3">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
-        <img alt="logo" src="../assets/img/cw-logo.png" height="45" />
+        <p class="">Home</p>
       </div>
     </router-link>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
@@ -12,14 +12,14 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto">
         <li>
-          <router-link :to="{ name: 'About' }" class="btn text-success lighten-30 selectable text-uppercase">
-            About
-          </router-link>
+          Create
+          <!-- add bs dropdown menu : create vault, create keep -->
         </li>
       </ul>
       <!-- LOGIN COMPONENT HERE -->
       <div>
-        <button class="btn text-light" @click="toggleTheme"><i class="mdi" :class="theme == 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"></i></button>
+        <button class="btn text-light" @click="toggleTheme"><i class="mdi"
+            :class="theme == 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"></i></button>
       </div>
       <Login />
     </div>
@@ -67,7 +67,7 @@ a:hover {
   border-bottom-right-radius: 0;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 576px) {
   nav {
     height: 64px;
   }
