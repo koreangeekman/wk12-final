@@ -18,7 +18,7 @@ public class VaultKeepsRepo
   internal VaultKeep CreateVaultKeep(VaultKeep vaultKeepData)
   {
     string sql = @"INSERT INTO 
-        vaults(creatorId, vaultId, keepId)
+        vaultkeeps(creatorId, vaultId, keepId)
         VALUES(@CreatorId, @VaultId, @KeepId);
         
         SELECT * FROM vaultkeeps WHERE id = LAST_INSERT_ID();";
@@ -27,7 +27,7 @@ public class VaultKeepsRepo
 
   internal void DeleteVaultKeep(int vaultKeepId)
   {
-    string sql = "DELETE FROM vaultkeeps WHERE id = @VaultId;";
+    string sql = "DELETE FROM vaultkeeps WHERE id = @vaultKeepId;";
     db.Execute(sql, new { vaultKeepId });
   }
 

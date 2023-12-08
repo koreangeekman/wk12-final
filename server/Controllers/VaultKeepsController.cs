@@ -15,20 +15,20 @@ public class VaultKeepsController : ControllerBase
 
   [Authorize]
   [HttpPost]
-  public async Task<ActionResult<VaultKeep>> CreateVault(VaultKeep vaultData)
+  public async Task<ActionResult<VaultKeep>> CreateVaultKeep(VaultKeep vaultKeepData)
   {
     try
     {
       Account userInfo = await a0.GetUserInfoAsync<Account>(HttpContext);
-      vaultData.CreatorId = userInfo.Id;
-      return Ok(vaultKeepsService.CreateVaultKeep(vaultData));
+      vaultKeepData.CreatorId = userInfo.Id;
+      return Ok(vaultKeepsService.CreateVaultKeep(vaultKeepData));
     }
     catch (Exception e) { return BadRequest(e.Message); }
   }
 
   [Authorize]
   [HttpDelete("{vaultId}")]
-  public async Task<ActionResult<VaultKeep>> DeleteVault(int vaultId)
+  public async Task<ActionResult<VaultKeep>> DeleteVaultKeep(int vaultId)
   {
     try
     {
