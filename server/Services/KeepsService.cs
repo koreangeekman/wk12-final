@@ -11,11 +11,8 @@ public class KeepsService
 
   internal List<Keep> GetKeeps(string query)
   {
-    if (query != null)
-    {
-      return keepsRepo.GetKeepsByQuery(query);
-    }
-    return keepsRepo.GetKeeps();
+    if (query == null) { return keepsRepo.GetKeeps(); }
+    return keepsRepo.GetKeepsByQuery("'%" + query + "%'");
   }
 
   internal Keep GetKeepById(int keepId)
@@ -31,11 +28,13 @@ public class KeepsService
     keep.Name = keepData.Name ?? keep.Name;
     keep.Description = keepData.Description ?? keep.Description;
     keep.Img = keepData.Img ?? keep.Img;
-    return keepsRepo.EditKeep(keepData);
+    return keepsRepo.EditKeep(keep);
   }
 
   internal string DeleteKeep(string creatorId, int keepId)
   {
+    Keep keep = GetKeepById(keepId);
+    if (keep.CreatorId != creatorId) { throw new Exception("Forbidden action: Not yours to delete"); }
     keepsRepo.DeleteKeep(keepId);
     return "Keep has been permanently deleted";
   }

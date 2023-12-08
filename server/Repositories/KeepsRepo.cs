@@ -22,7 +22,7 @@ public class KeepsRepo
   { return db.QueryFirstOrDefault<Keep>("SELECT * FROM keeps WHERE id = @KeepId;", new { keepId }); }
 
   internal List<Keep> GetKeepsByQuery(string query)
-  { return db.Query<Keep>("SELECT * FROM keeps WHERE name LIKE @Query;", new { query }).ToList(); }
+  { return db.Query<Keep>("SELECT * FROM keeps WHERE name OR description LIKE @Query;", new { query }).ToList(); }
 
   internal Keep CreateKeep(Keep keepData)
   {
@@ -42,7 +42,7 @@ public class KeepsRepo
           name = @Name,
           description = @Description,
           img = @Img
-        WHERE id = @Id
+        WHERE id = @Id;
         
         SELECT * FROM keeps WHERE id = @Id;";
     return db.QueryFirstOrDefault<Keep>(sql, keepData);
@@ -51,7 +51,7 @@ public class KeepsRepo
   internal void DeleteKeep(int keepId)
   {
     string sql = "DELETE FROM keeps WHERE id = @KeepId;";
-    db.QueryFirstOrDefault<Keep>(sql, new { keepId });
+    db.Execute(sql, new { keepId });
   }
 
 }
