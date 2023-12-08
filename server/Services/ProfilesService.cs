@@ -20,8 +20,12 @@ public class ProfilesService
   internal Profile GetProfileById(string profileId)
   { return profilesRepo.GetProfileById(profileId); }
 
-  internal List<Vault> GetVaultsByProfileId(string profileId)
-  { return vaultsRepo.GetVaultsByProfileId(profileId); }
+  internal List<Vault> GetVaultsByProfileId(string accountId, string profileId)
+  {
+    if (accountId == profileId)
+    { return vaultsRepo.GetAllVaultsByProfileId(profileId); }
+    return vaultsRepo.GetPublicVaultsByProfileId(profileId);
+  }
 
   internal List<Keep> GetKeepsByProfileId(string profileId)
   { return keepsRepo.GetKeepsByProfileId(profileId); }

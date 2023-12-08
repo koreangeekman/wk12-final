@@ -27,8 +27,20 @@ public class VaultsRepo
     return db.Query<Vault, Profile, Vault>(sql, PopulateCreator, new { vaultId }).FirstOrDefault();
   }
 
-  internal List<Vault> GetVaultsByProfileId(string creatorId)
-  { return db.Query<Vault>("SELECT * FROM vaults WHERE creatorId = @CreatorId;", new { creatorId }).ToList(); }
+  internal List<Vault> GetAllVaultsByProfileId(string profileId)
+  {
+    string sql = "SELECT * FROM vaults WHERE creatorId = @ProfileId;";
+    return db.Query<Vault>(sql, new { profileId }).ToList();
+  }
+
+  internal List<Vault> GetPublicVaultsByProfileId(string profileId)
+  {
+    string sql = @"
+        SELECT * FROM vaults 
+        WHERE creatorId = @ProfileId
+        AND isPrivate = false;";
+    return db.Query<Vault>(sql, new { profileId }).ToList();
+  }
 
   internal Vault CreateVault(Vault vaultData)
   {
