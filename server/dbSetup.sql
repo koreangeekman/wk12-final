@@ -10,5 +10,5 @@ CREATE TABLE
         github varchar(255) COMMENT 'User github',
         linkedin varchar(255) COMMENT 'User linkedin',
         resume varchar(255) COMMENT 'User resume',
-        bio varchar(255) COMMENT 'User bio',
+        bio varchar(255) COMMENT 'User bio'
     ) default charset utf8 COMMENT '';
