@@ -9,9 +9,6 @@ public class VaultKeepsService
     vaultKeepsRepo = _vaultKeepsRepo;
   }
 
-  internal List<VaultKeep> GetKeepsByVaultId(int vaultKeepId)
-  { return vaultKeepsRepo.GetKeepsByVaultId(vaultKeepId); }
-
   internal VaultKeep GetVaultKeepById(int vaultKeepId)
   { return vaultKeepsRepo.GetVaultKeepById(vaultKeepId) ?? throw new Exception("Unable to locate by Id: " + vaultKeepId); }
 
