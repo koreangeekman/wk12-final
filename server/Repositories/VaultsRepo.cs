@@ -50,4 +50,5 @@ public class VaultsRepo
     string sql = "DELETE FROM vaults WHERE id = @VaultId;";
     db.Execute(sql, new { vaultId });
   }
+
 }
