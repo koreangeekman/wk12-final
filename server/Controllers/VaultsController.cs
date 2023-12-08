@@ -13,10 +13,10 @@ public class VaultsController : ControllerBase
     vaultsService = _vaultsService;
   }
 
-  [HttpGet]
-  public ActionResult<List<VaultsController>> GetVaults()
-  {
-    try { return Ok(); }
-    catch (Exception e) { return BadRequest(e.Message); }
-  }
+  // [HttpGet]
+  // public ActionResult<List<VaultsController>> GetVaults()
+  // {
+  //   try { return Ok(vaultsService.GetVaults()); }
+  //   catch (Exception e) { return BadRequest(e.Message); }
+  // }
 }

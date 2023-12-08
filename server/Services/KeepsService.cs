@@ -9,14 +9,17 @@ public class KeepsService
     keepsRepo = _keepsRepo;
   }
 
-  internal List<Keep> GetKeeps()
-  { return keepsRepo.GetKeeps(); }
+  internal List<Keep> GetKeeps(string query)
+  {
+    if (query != null)
+    {
+      return keepsRepo.GetKeepsByQuery(query);
+    }
+    return keepsRepo.GetKeeps();
+  }
 
   internal Keep GetKeepById(int keepId)
-  { return keepsRepo.GetKeepById(keepId); }
-
-  internal List<Keep> GetKeepsByQuery(string query)
-  { return keepsRepo.GetKeepsByQuery(query); }
+  { return keepsRepo.GetKeepById(keepId) ?? throw new Exception("Unable to locate by Id: " + keepId); }
 
   internal Keep CreateKeep(Keep keepData)
   { return keepsRepo.CreateKeep(keepData); }
@@ -31,7 +34,7 @@ public class KeepsService
     return keepsRepo.EditKeep(keepData);
   }
 
-  internal string DeleteKeep(int keepId)
+  internal string DeleteKeep(string creatorId, int keepId)
   {
     keepsRepo.DeleteKeep(keepId);
     return "Keep has been permanently deleted";

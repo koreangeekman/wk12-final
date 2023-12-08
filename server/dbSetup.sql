@@ -36,7 +36,7 @@ CREATE TABLE
         name CHAR(100) NOT NULL,
         description VARCHAR(1000) NOT NULL,
         img VARCHAR(300) NOT NULL,
-        views INT UNSIGNED NOT NULL,
+        views INT UNSIGNED NOT NULL DEFAULT 0,
         FOREIGN KEY (creatorId) REFERENCES accounts(id)
     ) default charset utf8 COMMENT '';
 

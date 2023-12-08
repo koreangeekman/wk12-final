@@ -27,8 +27,8 @@ public class KeepsRepo
   internal Keep CreateKeep(Keep keepData)
   {
     string sql = @"INSERT INTO 
-        keeps(creatorId, name, description, img, views)
-        VALUES(@CreatorId, @Name, @Description, @Img, @Views);
+        keeps(creatorId, name, description, img)
+        VALUES(@CreatorId, @Name, @Description, @Img);
         
         SELECT * FROM keeps WHERE id = LAST_INSERT_ID();";
     return db.QueryFirstOrDefault<Keep>(sql, keepData);

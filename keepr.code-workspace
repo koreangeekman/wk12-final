@@ -39,7 +39,8 @@
       "source.fixAll": "explicit"
     },
     "cSpell.words": [
-      "keepr"
+      "keepr",
+      "mongodirector"
     ]
   }
 }
