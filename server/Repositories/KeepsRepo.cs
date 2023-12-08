@@ -10,16 +10,34 @@ public class KeepsRepo
     db = _db;
   }
 
-  private int FormatKeeps()
+  private Keep PopulateCreator(Keep keep, Profile profile)
   {
-    return 2;
+    keep.Creator = profile;
+    return keep;
   }
 
   internal List<Keep> GetKeeps()
-  { return db.Query<Keep>("SELECT * FROM keeps;").ToList(); }
+  {
+    string sql = @"
+        SELECT 
+        k.*,
+        acc.*
+        FROM keeps k
+        JOIN accounts acc ON acc.id = k.creatorId;";
+    return db.Query<Keep, Profile, Keep>(sql, PopulateCreator).ToList();
+  }
 
   internal Keep GetKeepById(int keepId)
-  { return db.QueryFirstOrDefault<Keep>("SELECT * FROM keeps WHERE id = @KeepId;", new { keepId }); }
+  {
+    string sql = @"
+        SELECT 
+        k.*,
+        acc.*
+        FROM keeps k
+        JOIN accounts acc ON acc.id = k.creatorId
+        WHERE k.id = @keepId;";
+    return db.Query<Keep, Profile, Keep>(sql, PopulateCreator, new { keepId }).FirstOrDefault();
+  }
 
   internal List<Keep> GetKeepsByProfileId(string accountId)
   { return db.Query<Keep>("SELECT * FROM keeps WHERE creatorId = @AccountId;", new { accountId }).ToList(); }
@@ -33,8 +51,13 @@ public class KeepsRepo
         keeps(creatorId, name, description, img)
         VALUES(@CreatorId, @Name, @Description, @Img);
         
-        SELECT * FROM keeps WHERE id = LAST_INSERT_ID();";
-    return db.QueryFirstOrDefault<Keep>(sql, keepData);
+        SELECT 
+        k.*,
+        acc.* 
+        FROM keeps k
+        JOIN accounts acc ON acc.id = k.creatorId  
+        WHERE k.id = LAST_INSERT_ID();";
+    return db.Query<Keep, Profile, Keep>(sql, PopulateCreator, keepData).FirstOrDefault();
   }
 
   internal Keep EditKeep(Keep keepData)
@@ -47,8 +70,13 @@ public class KeepsRepo
           img = @Img
         WHERE id = @Id;
         
-        SELECT * FROM keeps WHERE id = @Id;";
-    return db.QueryFirstOrDefault<Keep>(sql, keepData);
+        SELECT 
+        k.*,
+        acc.* 
+        FROM keeps k
+        JOIN accounts acc ON acc.id = k.creatorId  
+        WHERE k.id = @Id;";
+    return db.Query<Keep, Profile, Keep>(sql, PopulateCreator, keepData).FirstOrDefault();
   }
 
   internal void DeleteKeep(int keepId)

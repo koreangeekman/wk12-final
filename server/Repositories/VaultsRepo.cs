@@ -9,13 +9,23 @@ public class VaultsRepo
     db = _db;
   }
 
-  private int FormatVaults()
+  private Vault PopulateCreator(Vault vault, Profile profile)
   {
-    return 2;
+    vault.Creator = profile;
+    return vault;
   }
 
   internal Vault GetVaultById(int vaultId)
-  { return db.QueryFirstOrDefault<Vault>("SELECT * FROM vaults WHERE id = @VaultId;", new { vaultId }); }
+  {
+    string sql = @"
+        SELECT 
+        v.*,
+        acc.*
+        FROM vaults v
+        JOIN accounts acc ON acc.id = v.creatorId
+        WHERE v.id = @VaultId;";
+    return db.Query<Vault, Profile, Vault>(sql, PopulateCreator, new { vaultId }).FirstOrDefault();
+  }
 
   internal List<Vault> GetVaultsByProfileId(string creatorId)
   { return db.Query<Vault>("SELECT * FROM vaults WHERE creatorId = @CreatorId;", new { creatorId }).ToList(); }
@@ -26,8 +36,13 @@ public class VaultsRepo
         vaults(creatorId, name, description, img, isPrivate)
         VALUES(@CreatorId, @Name, @Description, @Img, @IsPrivate);
         
-        SELECT * FROM vaults WHERE id = LAST_INSERT_ID();";
-    return db.QueryFirstOrDefault<Vault>(sql, vaultData);
+        SELECT 
+        v.*,
+        acc.*
+        FROM vaults v
+        JOIN accounts acc ON acc.id = v.creatorId
+        WHERE v.id = LAST_INSERT_ID();";
+    return db.Query<Vault, Profile, Vault>(sql, PopulateCreator, vaultData).FirstOrDefault();
   }
 
   internal Vault EditVault(Vault vaultData)
