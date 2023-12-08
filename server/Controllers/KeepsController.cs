@@ -14,9 +14,25 @@ public class KeepsController : ControllerBase
   }
 
   [HttpGet]
-  public ActionResult<List<KeepsController>> GetKeeps()
+  public ActionResult<List<Keep>> GetKeeps()
+  {
+    try { return Ok(keepsService.GetKeeps()); }
+    catch (Exception e) { return BadRequest(e.Message); }
+  }
+
+  [HttpGet("{keepId}")]
+  public ActionResult<Keep> GetKeepById(int keepId)
+  {
+    try { return Ok(keepsService.GetKeepById(keepId)); }
+    catch (Exception e) { return BadRequest(e.Message); }
+  }
+
+  [HttpGet]
+  public ActionResult<List<Keep>> GetKeepsByQuery(string query)
   {
     try { return Ok(); }
     catch (Exception e) { return BadRequest(e.Message); }
   }
+
+
 }
