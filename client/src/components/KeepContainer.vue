@@ -10,15 +10,35 @@
 
 
 <script>
-import { AppState } from '../AppState';
+import Pop from "../utils/Pop.js";
 import { computed } from 'vue';
+import { AppState } from '../AppState';
+import { Vault } from "../models/Vault.js";
 import KeepCard from "../components/KeepCard.vue";
+import { Profile } from "../models/Profile.js";
 
 export default {
-  setup() {
+  props: {
+    vault: { type: Vault, default: null },
+    profile: { type: Profile, default: null },
+  },
+  setup(props) {
+    async function _getKeeps(options) {
+      try { keepsService.getKeeps(options); }
+      catch (error) { Pop.error(error); }
+    }
+    async function _getKeepsByProfile(options) {
+      try { keepsService.getKeeps(options); }
+      catch (error) { Pop.error(error); }
+    }
+    async function _getKeepsByAccount(options) {
+      try { keepsService.getKeeps(options); }
+      catch (error) { Pop.error(error); }
+    }
     return {
       account: computed(() => AppState.account),
-      keeps: computed(() => AppState.keeps)
+      keeps: computed(() => AppState.keeps),
+
     }
   },
   components: { KeepCard }

@@ -1,6 +1,6 @@
 <template>
   <div class="keep-card p-5">
-
+    {{ keep }}
   </div>
 </template>
 
@@ -8,6 +8,7 @@
 <script>
 import { AppState } from '../AppState';
 import { computed } from 'vue';
+import { Keep } from "../models/Keep.js";
 
 export default {
   props: { keep: { type: Keep, required: true } },
