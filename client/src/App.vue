@@ -4,7 +4,7 @@
       <Navbar />
     </header>
   </div>
-  <div class="order-1 order-md-2 px-0 px-lg-3">
+  <div class="order-1 order-md-2">
     <main>
       <router-view />
     </main>
