@@ -13,12 +13,21 @@
               <button class="btn selectable px-3 py-1 mx-1 bg-primary fw-bold" type="button">Vaults</button>
             </router-link>
           </li>
-          <li class="nav-item dropdown-md dropup">
+          <li class="nav-item dropdown d-none d-md-block">
             <button class="nav-link dropdown-toggle btn selectable px-3 py-1 fw-bold" data-bs-toggle="dropdown"
               role="button" aria-haspopup="true" aria-expanded="false">
-              Create
-              <small class="d-none d-md-inline">▼</small>
-              <small class="d-inline d-md-none">▲</small>
+              Create <small>▼</small>
+            </button>
+            <div class="dropdown-menu">
+              <button class="dropdown-item" type="button" @click="createKeep()">Create Keep</button>
+              <div class="dropdown-divider"></div>
+              <button class="dropdown-item" type="button" @click="createVault()">Create Vault</button>
+            </div>
+          </li>
+          <li class="nav-item dropup d-block d-md-none">
+            <button class="nav-link dropdown-toggle btn selectable px-3 py-1 fw-bold" data-bs-toggle="dropdown"
+              role="button" aria-haspopup="true" aria-expanded="false">
+              Create <small>▲</small>
             </button>
             <div class="dropdown-menu">
               <button class="dropdown-item" type="button" @click="createKeep()">Create Keep</button>
