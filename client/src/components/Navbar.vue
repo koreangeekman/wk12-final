@@ -47,7 +47,7 @@
       </div>
       <div class="w-100 d-flex justify-content-end align-items-center order-3">
         <button class="btn mx-3" @click="toggleTheme">
-          <i class="mdi" :class="theme == 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"></i>
+          <i class="fs-3 mdi" :class="theme == 'light' ? 'mdi-weather-sunny text-dark' : 'mdi-weather-night'"></i>
         </button>
         <Login />
       </div>

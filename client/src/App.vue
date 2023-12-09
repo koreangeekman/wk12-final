@@ -80,6 +80,10 @@ main {
   letter-spacing: 0em;
 }
 
+.light-shadow {
+  text-shadow: 0 0 .25rem var(--color-6);
+}
+
 // https://dev.to/xtrp/how-to-create-a-beautiful-custom-scrollbar-for-your-site-in-plain-css-1mjg
 ::-webkit-scrollbar {
   width: 20px;

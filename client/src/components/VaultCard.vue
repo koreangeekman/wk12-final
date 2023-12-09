@@ -1,5 +1,5 @@
 <template>
-  <div class="vault-card px-3 py-2 d-flex align-items-end">
+  <div class="vault-card p-2 ps-3 d-flex align-items-end">
     <span class="d-flex align-items-center justify-content-between h-100 w-100">
       <p class="fs-4 mb-0 app-font">{{ vault.name }}</p>
       <img :src="vault.creator.picture" :alt="vault.creator.name" :title="vault.creator.name" class="creator-img">
