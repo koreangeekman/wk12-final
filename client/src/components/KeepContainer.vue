@@ -11,11 +11,12 @@
 
 <script>
 import Pop from "../utils/Pop.js";
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import { AppState } from '../AppState';
 import { Vault } from "../models/Vault.js";
 import KeepCard from "../components/KeepCard.vue";
 import { Profile } from "../models/Profile.js";
+import { keepsService } from "../services/KeepsService.js";
 
 export default {
   props: {
@@ -23,18 +24,21 @@ export default {
     profile: { type: Profile, default: null },
   },
   setup(props) {
-    async function _getKeeps(options) {
-      try { keepsService.getKeeps(options); }
+    async function _getKeeps() {
+      try { keepsService.getKeeps(); }
       catch (error) { Pop.error(error); }
     }
-    async function _getKeepsByProfile(options) {
-      try { keepsService.getKeeps(options); }
+    async function _getKeepsByProfile(option) {
+      try { keepsService.getKeeps(option); }
       catch (error) { Pop.error(error); }
     }
-    async function _getKeepsByAccount(options) {
-      try { keepsService.getKeeps(options); }
+    async function _getKeepsByAccount(option) {
+      try { keepsService.getKeeps(option); }
       catch (error) { Pop.error(error); }
     }
+    onMounted(() => {
+      _getKeeps();
+    })
     return {
       account: computed(() => AppState.account),
       keeps: computed(() => AppState.keeps),
