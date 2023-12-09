@@ -1,5 +1,5 @@
 <template>
-  <div class="order-2 order-md-1">
+  <div class="order-2 order-md-1 py-2">
     <header>
       <Navbar />
     </header>
@@ -54,12 +54,26 @@ export default {
 @import "./assets/scss/main.scss";
 
 :root {
-  --main-height: calc(100vh - 64px);
+  --main-height: calc(100vh - 80px);
   --color-1: #F9F6FA;
   --color-2: #FEF6F0;
   --color-3: #E9D8D6;
   --color-4: #DED6E9;
   --color-5: #877A8F;
   --color-6: #2D2D2D;
+}
+
+main {
+  height: var(--main-height);
+  overflow-y: scroll;
+  box-shadow: 0 0 .25rem .25rem var(--color-3);
+}
+
+.app-font {
+  font-family: 'Marko One', serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.25rem;
+  letter-spacing: 0em;
 }
 </style>

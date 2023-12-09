@@ -4,21 +4,21 @@
       aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav me-auto align-items-center">
+    <div class="collapse navbar-collapse w-100 justify-content-end" id="navbarText">
+      <ul class="navbar-nav align-items-center w-100">
         <li class="nav-item">
           <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-            <button class="btn selectable px-3 py-1 mx-1 bg-primary" type="button">Keeps</button>
+            <button class="btn selectable px-3 py-1 mx-1 bg-primary fw-bold" type="button">Keeps</button>
           </router-link>
         </li>
         <li class="nav-item">
           <router-link class="navbar-brand d-flex" :to="{ name: 'Vaults' }">
-            <button class="btn selectable px-3 py-1 mx-1 bg-primary" type="button">Vaults</button>
+            <button class="btn selectable px-3 py-1 mx-1 bg-primary fw-bold" type="button">Vaults</button>
           </router-link>
         </li>
         <li class="nav-item dropdown">
-          <button class="nav-link dropdown-toggle btn selectable px-3 py-1" data-bs-toggle="dropdown" role="button"
-            aria-haspopup="true" aria-expanded="false">Create <small>▼</small></button>
+          <button class="nav-link dropdown-toggle btn selectable px-3 py-1 fw-bold" data-bs-toggle="dropdown"
+            role="button" aria-haspopup="true" aria-expanded="false">Create <small>▼</small></button>
           <div class="dropdown-menu">
             <button class="dropdown-item" type="button" @click="createKeep()">Create Keep</button>
             <div class="dropdown-divider"></div>
@@ -26,12 +26,18 @@
           </div>
         </li>
       </ul>
-      <!-- LOGIN COMPONENT HERE -->
-      <div>
-        <button class="btn" @click="toggleTheme">
-          <i class="mdi" :class="theme == 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"></i>
-        </button>
-      </div>
+    </div>
+    <div class="w-100 d-flex justify-content-center">
+      <p class="mb-0 px-1 rounded app-name app-font">
+        the <br>
+        keepr <br>
+        co.
+      </p>
+    </div>
+    <div class="w-100 d-flex justify-content-end">
+      <button class="btn" @click="toggleTheme">
+        <i class="mdi" :class="theme == 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"></i>
+      </button>
       <Login />
     </div>
   </nav>
@@ -79,6 +85,11 @@ a:hover {
   border-bottom: 2px solid var(--bs-success);
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+}
+
+.app-name {
+  border: 2px solid;
+  width: 4.5rem;
 }
 
 @media screen and (min-width: 576px) {
