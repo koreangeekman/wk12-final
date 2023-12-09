@@ -2,18 +2,12 @@
   <div class="modal fade" :id="modalId" tabindex="-1" :aria-labelledby="modalId + 'Label'" aria-hidden="true">
     <div class="modal-dialog" :class="modalSize">
       <div class="modal-content">
-        <div v-if="showHeader" class="modal-header">
-          <h1 class="modal-title fs-4" :id="modalId + 'Label'">
-            <slot name="modalHeader">Modal title</slot>
-          </h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <span v-if="!showHeader" class="d-flex justify-content-between">
-            <h1 class="modal-title fs-4 mt-2 mb-4" :id="modalId + 'Label'">
+        <div class="modal-body p-0">
+          <span v-if="showHeader" class="d-flex justify-content-between">
+            <h1 class="modal-title fs-4 m-4" :id="modalId + 'Label'">
               <slot name="modalHeader">Modal title</slot>
             </h1>
-            <button type="button" class="btn-close mt-3" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close m-4" data-bs-dismiss="modal" aria-label="Close"></button>
           </span>
           <slot name="modalBody">Modal Body</slot>
         </div>
@@ -37,7 +31,7 @@ export default {
   props: {
     modalId: { type: String },
     modalSize: { type: String, default: '' },
-    showHeader: { type: Boolean, default: false },
+    showHeader: { type: Boolean, default: true },
     showFooter: { type: Boolean, default: false },
   },
   setup() {

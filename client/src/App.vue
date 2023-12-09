@@ -34,12 +34,12 @@
 </template>
 
 <script>
-import { computed } from 'vue'
-import { AppState } from './AppState'
-import Navbar from './components/Navbar.vue'
-import KeepForm from './components/KeepForm.vue'
-import VaultForm from "./components/VaultForm.vue"
-import ModalComponent from "./components/ModalComponent.vue"
+import { computed } from 'vue';
+import { AppState } from './AppState';
+import Navbar from './components/Navbar.vue';
+import KeepForm from './components/KeepForm.vue';
+import VaultForm from "./components/VaultForm.vue";
+import ModalComponent from "./components/ModalComponent.vue";
 
 export default {
   setup() {

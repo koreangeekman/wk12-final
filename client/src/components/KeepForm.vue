@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="createKeep()" class="d-flex flex-column">
+  <form @submit.prevent="createKeep()" class="d-flex flex-column p-4">
     <div class="mb-3">
       <input v-model="formData.name" type="text" id="name" class="form-control" placeholder="Title..." required>
     </div>
@@ -13,8 +13,8 @@
         <div v-for="tag in tags" class="tag rounded-pill mx-2 my-1 px-2 py-1 bg-primary">{{ tag }}</div>
       </span>
     </div>
-    <textarea v-model="formData.description" name="description" id="description" rows="8" required
-      class="form-control">Keep Description...</textarea>
+    <textarea v-model="formData.description" name="description" id="description" rows="8" required class="form-control"
+      placeholder="Description..."></textarea>
     <button class="btn btn-secondary mt-4 align-self-end" type="submit">Create</button>
   </form>
 </template>

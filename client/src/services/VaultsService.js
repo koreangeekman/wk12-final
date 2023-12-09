@@ -15,6 +15,11 @@ class VaultsService {
     AppState.activeVault = new Vault(res.data);
   }
 
+  async getMyVaults() {
+    const res = await api.get('account/vaults');
+    AppState.myVaults = res.data.map(vault => new Vault(vault));
+  }
+
   async getVaultsByProfileId(profileId) {
     const res = await api.get('api/profiles/' + profileId);
     AppState.vaults = res.data.map(vault => new Vault(vault));

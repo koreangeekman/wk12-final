@@ -1,10 +1,14 @@
 <template>
-  <form @submit.prevent class="d-flex flex-column">
+  <form @submit.prevent="createVault()" class="d-flex flex-column p-4">
     <div class="mb-3">
       <input v-model="formData.name" type="text" id="name" class="form-control" placeholder="Title..." required>
     </div>
     <div class="mb-3">
       <input v-model="formData.img" type="url" id="img" class="form-control" placeholder="Image URL..." required>
+    </div>
+    <div class="mb-3">
+      <textarea v-model="formData.description" id="description" class="form-control" placeholder="Description..."
+        required></textarea>
     </div>
     <span class="d-flex justify-content-between align-items-center">
       <div class="form-check ms-3 my-2">
@@ -19,17 +23,29 @@
 
 
 <script>
-import { AppState } from '../AppState';
+import Pop from "../utils/Pop.js";
 import { computed, ref } from 'vue';
+import { AppState } from '../AppState.js';
+import { vaultsService } from "../services/VaultsService.js";
+import { Modal } from "bootstrap";
 
 export default {
   setup() {
-    const formData = ref({});
+    const formData = ref({ isPrivate: false });
 
     return {
       formData,
       account: computed(() => AppState.account),
       tags: computed(() => AppState.tags),
+
+      async createVault() {
+        try {
+          await vaultsService.createVault(formData.value);
+          Modal.getInstance('#createVault').hide();
+          formData.value = { isPrivate: false };
+        }
+        catch (error) { Pop.error(error); }
+      }
     }
   }
 };
