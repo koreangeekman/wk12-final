@@ -1,10 +1,10 @@
 <template>
-  <div class="order-2 order-md-1 py-2">
+  <div class="order-2 order-md-1">
     <header>
       <Navbar />
     </header>
   </div>
-  <div class="order-1 order-md-2">
+  <div class="order-1 order-md-2 px-0 px-lg-3">
     <main>
       <router-view />
     </main>
@@ -54,7 +54,7 @@ export default {
 @import "./assets/scss/main.scss";
 
 :root {
-  --main-height: calc(100vh - 80px);
+  --main-height: calc(100vh - 96px);
   --color-1: #F9F6FA;
   --color-2: #FEF6F0;
   --color-3: #E9D8D6;
@@ -63,10 +63,13 @@ export default {
   --color-6: #2D2D2D;
 }
 
+header {
+  box-shadow: 0 0 .25rem .25rem var(--color-3);
+}
+
 main {
   height: var(--main-height);
   overflow-y: scroll;
-  box-shadow: 0 0 .25rem .25rem var(--color-3);
 }
 
 .app-font {
@@ -75,5 +78,25 @@ main {
   font-weight: 400;
   line-height: 1.25rem;
   letter-spacing: 0em;
+}
+
+// https://dev.to/xtrp/how-to-create-a-beautiful-custom-scrollbar-for-your-site-in-plain-css-1mjg
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #d6dee1;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #a8bbbf;
 }
 </style>

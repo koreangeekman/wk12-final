@@ -1,7 +1,7 @@
 <template>
-  <div class="container-fluid">
-    <section class="row justify-content-center px-1 px-md-5 py-0 py-md-4">
-      <div class="col-6 col-md-4 col-lg-3 py-3" v-for="keep in keeps" :key="keep.id">
+  <div class="container-fluid px-0 px-lg-5">
+    <section class="row justify-content-center px-1 px-lg-5 py-0 py-lg-4">
+      <div class="col-6 col-lg-4 col-xxl-3 py-3" v-for="keep in keeps" :key="keep.id">
         <KeepCard :keep="keep" />
       </div>
     </section>

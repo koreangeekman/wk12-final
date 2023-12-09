@@ -1,7 +1,7 @@
 <template>
   <div class="keep-card px-3 py-2 d-flex align-items-end">
     <span class="d-flex align-items-center justify-content-between h-100 w-100">
-      <p class="fs-3 mb-0 app-font">{{ keep.name }}</p>
+      <p class="fs-5 mb-0 app-font">{{ keep.name }}</p>
       <img :src="keep.creator.picture" :alt="keep.creator.name" :title="keep.creator.name" class="creator-img">
     </span>
   </div>
@@ -9,8 +9,8 @@
 
 
 <script>
-import { AppState } from '../AppState';
 import { computed } from 'vue';
+import { AppState } from '../AppState';
 import { Keep } from "../models/Keep.js";
 
 export default {

@@ -1,45 +1,52 @@
 <template>
   <nav class="navbar navbar-expand-sm px-3">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
-      aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse w-100 justify-content-end" id="navbarText">
-      <ul class="navbar-nav align-items-center w-100">
-        <li class="nav-item">
-          <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-            <button class="btn selectable px-3 py-1 mx-1 bg-primary fw-bold" type="button">Keeps</button>
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="navbar-brand d-flex" :to="{ name: 'Vaults' }">
-            <button class="btn selectable px-3 py-1 mx-1 bg-primary fw-bold" type="button">Vaults</button>
-          </router-link>
-        </li>
-        <li class="nav-item dropdown">
-          <button class="nav-link dropdown-toggle btn selectable px-3 py-1 fw-bold" data-bs-toggle="dropdown"
-            role="button" aria-haspopup="true" aria-expanded="false">Create <small>▼</small></button>
-          <div class="dropdown-menu">
-            <button class="dropdown-item" type="button" @click="createKeep()">Create Keep</button>
-            <div class="dropdown-divider"></div>
-            <button class="dropdown-item" type="button" @click="createVault()">Create Vault</button>
-          </div>
-        </li>
-      </ul>
-    </div>
-    <div class="w-100 d-flex justify-content-center">
-      <p class="mb-0 px-1 rounded app-name app-font">
-        the <br>
-        keepr <br>
-        co.
-      </p>
-    </div>
-    <div class="w-100 d-flex justify-content-end">
-      <button class="btn" @click="toggleTheme">
-        <i class="mdi" :class="theme == 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"></i>
+    <span class="d-flex align-items-center w-100">
+      <div class="collapse navbar-collapse w-100 justify-content-md-end order-2 order-md-1" id="navbarText">
+        <ul class="navbar-nav align-items-center w-100">
+          <li class="nav-item">
+            <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
+              <button class="btn selectable px-3 py-1 mx-1 bg-primary fw-bold" type="button">Keeps</button>
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="navbar-brand d-flex" :to="{ name: 'Vaults' }">
+              <button class="btn selectable px-3 py-1 mx-1 bg-primary fw-bold" type="button">Vaults</button>
+            </router-link>
+          </li>
+          <li class="nav-item dropdown-md dropup">
+            <button class="nav-link dropdown-toggle btn selectable px-3 py-1 fw-bold" data-bs-toggle="dropdown"
+              role="button" aria-haspopup="true" aria-expanded="false">
+              Create
+              <small class="d-none d-md-inline">▼</small>
+              <small class="d-inline d-md-none">▲</small>
+            </button>
+            <div class="dropdown-menu">
+              <button class="dropdown-item" type="button" @click="createKeep()">Create Keep</button>
+              <div class="dropdown-divider"></div>
+              <button class="dropdown-item" type="button" @click="createVault()">Create Vault</button>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="w-100 d-flex justify-content-md-center order-1 order-md-2">
+        <p class="mb-0 px-1 rounded app-name app-font">
+          the <br>
+          keepr <br>
+          co.
+        </p>
+      </div>
+      <div class="w-100 d-flex justify-content-end align-items-center order-3">
+        <button class="btn mx-3" @click="toggleTheme">
+          <i class="mdi" :class="theme == 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"></i>
+        </button>
+        <Login />
+      </div>
+      <button class="navbar-toggler order-4" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+        aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
       </button>
-      <Login />
-    </div>
+    </span>
   </nav>
 </template>
 
@@ -94,7 +101,7 @@ a:hover {
 
 @media screen and (min-width: 576px) {
   nav {
-    height: 64px;
+    height: 96px;
   }
 }
 </style>
