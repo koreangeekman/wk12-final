@@ -9,12 +9,37 @@
       <router-view />
     </main>
   </div>
+
+  <!-- 
+  <ModalComponent :modalId="'exampleModal'" :modalSize="'modal-lg'" :showHeader="true" :showFooter="false">
+    <template #modalHeader></template>
+    <template #modalBody></template>
+    <template #modalFooter></template>
+  </ModalComponent>
+   -->
+
+  <ModalComponent :modalId="'createKeep'">
+    <template #modalHeader>Add your keep</template>
+    <template #modalBody>
+      <KeepForm />
+    </template>
+  </ModalComponent>
+
+  <ModalComponent :modalId="'createVault'">
+    <template #modalHeader>Add your vault</template>
+    <template #modalBody>
+      <VaultForm />
+    </template>
+  </ModalComponent>
 </template>
 
 <script>
 import { computed } from 'vue'
 import { AppState } from './AppState'
 import Navbar from './components/Navbar.vue'
+import KeepForm from './components/KeepForm.vue'
+import VaultForm from "./components/VaultForm.vue"
+import ModalComponent from "./components/ModalComponent.vue"
 
 export default {
   setup() {
@@ -22,7 +47,7 @@ export default {
       appState: computed(() => AppState)
     }
   },
-  components: { Navbar }
+  components: { Navbar, ModalComponent, KeepForm, VaultForm }
 }
 </script>
 <style lang="scss">

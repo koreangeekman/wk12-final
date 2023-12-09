@@ -20,9 +20,9 @@
           <button class="nav-link dropdown-toggle btn selectable px-3 py-1" data-bs-toggle="dropdown" role="button"
             aria-haspopup="true" aria-expanded="false">Create <small>▼</small></button>
           <div class="dropdown-menu">
-            <button class="dropdown-item" type="button" @click="openCreateKeep()">Create Keep</button>
+            <button class="dropdown-item" type="button" @click="createKeep()">Create Keep</button>
             <div class="dropdown-divider"></div>
-            <button class="dropdown-item" type="button" @click="openCreateVault()">Create Vault</button>
+            <button class="dropdown-item" type="button" @click="createVault()">Create Vault</button>
           </div>
         </li>
       </ul>
@@ -41,6 +41,7 @@
 import { onMounted, ref } from 'vue';
 import { loadState, saveState } from '../utils/Store.js';
 import Login from './Login.vue';
+import { Modal } from "bootstrap";
 export default {
   setup() {
 
@@ -56,7 +57,9 @@ export default {
         theme.value = theme.value == 'light' ? 'dark' : 'light'
         document.documentElement.setAttribute('data-bs-theme', theme.value)
         saveState('theme', theme.value)
-      }
+      },
+      createKeep() { Modal.getOrCreateInstance('#createKeep').show(); },
+      createVault() { Modal.getOrCreateInstance('#createVault').show(); },
     }
   },
   components: { Login }
