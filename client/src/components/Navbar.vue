@@ -1,17 +1,29 @@
 <template>
   <nav class="navbar navbar-expand-sm px-3">
-    <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-      <p class="rounded px-3 py-1 bg-primary">Home</p>
-    </router-link>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
       aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav me-auto">
-        <li>
-          Create
-          <!-- add bs dropdown menu : create vault, create keep -->
+      <ul class="navbar-nav me-auto align-items-center">
+        <li class="nav-item">
+          <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
+            <button class="btn selectable px-3 py-1 mx-1 bg-primary" type="button">Keeps</button>
+          </router-link>
+        </li>
+        <li class="nav-item">
+          <router-link class="navbar-brand d-flex" :to="{ name: 'Vaults' }">
+            <button class="btn selectable px-3 py-1 mx-1 bg-primary" type="button">Vaults</button>
+          </router-link>
+        </li>
+        <li class="nav-item dropdown">
+          <button class="nav-link dropdown-toggle btn selectable px-3 py-1" data-bs-toggle="dropdown" role="button"
+            aria-haspopup="true" aria-expanded="false">Create <small>▼</small></button>
+          <div class="dropdown-menu">
+            <button class="dropdown-item" type="button" @click="openCreateKeep()">Create Keep</button>
+            <div class="dropdown-divider"></div>
+            <button class="dropdown-item" type="button" @click="openCreateVault()">Create Vault</button>
+          </div>
         </li>
       </ul>
       <!-- LOGIN COMPONENT HERE -->
