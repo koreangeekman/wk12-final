@@ -4,13 +4,13 @@ public class VaultKeepsService
 {
   private readonly VaultKeepsRepo vaultKeepsRepo;
   private readonly VaultsRepo vaultsRepo;
-  private readonly KeepsRepo keepsRepo;
+  private readonly KeepsService keepsService;
 
-  public VaultKeepsService(VaultKeepsRepo _vaultKeepsRepo, VaultsRepo _vaultsRepo, KeepsRepo _keepsRepo)
+  public VaultKeepsService(VaultKeepsRepo _vaultKeepsRepo, VaultsRepo _vaultsRepo, KeepsService _keepsService)
   {
     vaultKeepsRepo = _vaultKeepsRepo;
     vaultsRepo = _vaultsRepo;
-    keepsRepo = _keepsRepo;
+    keepsService = _keepsService;
   }
 
   internal VaultKeep GetVaultKeepById(int vaultKeepId)
@@ -21,7 +21,7 @@ public class VaultKeepsService
     Vault vault = vaultsRepo.GetVaultById(vaultKeepData.VaultId);
     if (vault.CreatorId != vaultKeepData.CreatorId) { throw new Exception("Not your vault to add to!"); }
     VaultKeep vaultKeep = vaultKeepsRepo.CreateVaultKeep(vaultKeepData);
-    // keepsRepo.AddKeptCount();
+    keepsService.AddKeptCount(vaultKeep.KeepId);
     return vaultKeep;
   }
 
@@ -30,6 +30,7 @@ public class VaultKeepsService
     VaultKeep vaultKeep = GetVaultKeepById(vaultKeepId);
     if (vaultKeep.CreatorId != creatorId) { throw new Exception("Forbidden action: Not yours to delete"); }
     vaultKeepsRepo.DeleteVaultKeep(vaultKeepId);
+    keepsService.RemoveKeptCount(vaultKeep.KeepId);
     return "Vault-Keep Association has been permanently deleted";
   }
 

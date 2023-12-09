@@ -50,4 +50,18 @@ public class KeepsService
     return keepsRepo.EditKeep(keep);
   }
 
+  internal Keep AddKeptCount(int keepId)
+  {
+    Keep keep = GetKeepById(keepId, true);
+    keep.Kept++;
+    return keepsRepo.EditKeep(keep);
+  }
+
+  internal Keep RemoveKeptCount(int keepId)
+  {
+    Keep keep = GetKeepById(keepId, true);
+    keep.Kept--;
+    return keepsRepo.EditKeep(keep);
+  }
+
 }
