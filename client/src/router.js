@@ -8,13 +8,19 @@ function loadPage(page) {
 const routes = [
   {
     path: '/',
-    name: 'Home',
+    name: 'Home', // Keeps Page
     component: loadPage('HomePage')
   },
   {
     path: '/vaults',
     name: 'Vaults',
     component: loadPage('VaultsPage'),
+    beforeEnter: authSettled
+  },
+  {
+    path: '/vaults',
+    name: 'VaultDetails',
+    component: loadPage('VaultDetailsPage'),
     beforeEnter: authSettled
   },
   {
