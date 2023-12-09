@@ -2,6 +2,7 @@ import { DataModel } from "./DataModel.js"
 
 export class Vault extends DataModel {
   constructor(data) {
+    super(data)
     // this.id = data.id
     // this.creatorId = data.creatorId
     // this.img = data.img

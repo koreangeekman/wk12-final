@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <section class="row justify-content-center px-1 px-md-5 py-0 py-md-4">
-      <div class="col-6 col-md-4 " v-for="keep in keeps" :key="keep.id">
+      <div class="col-6 col-md-4 col-lg-3 py-3" v-for="keep in keeps" :key="keep.id">
         <KeepCard :keep="keep" />
       </div>
     </section>
@@ -11,12 +11,12 @@
 
 <script>
 import Pop from "../utils/Pop.js";
+import { AppState } from '../AppState.js';
 import { computed, onMounted } from 'vue';
-import { AppState } from '../AppState';
-import { Vault } from "../models/Vault.js";
-import KeepCard from "../components/KeepCard.vue";
-import { Profile } from "../models/Profile.js";
 import { keepsService } from "../services/KeepsService.js";
+import { Profile } from "../models/Profile.js";
+import { Vault } from "../models/Vault.js";
+import KeepCard from "./KeepCard.vue";
 
 export default {
   props: {
@@ -37,7 +37,9 @@ export default {
       catch (error) { Pop.error(error); }
     }
     onMounted(() => {
-      _getKeeps();
+      if (props.profile) { _getKeepsByProfile(); }
+      else if (props.vault) { _getKeepsByAccount(); }
+      else { _getKeeps(); }
     })
     return {
       account: computed(() => AppState.account),
