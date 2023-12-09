@@ -1,10 +1,14 @@
 <template>
-  <header>
-    <Navbar />
-  </header>
-  <main>
-    <router-view />
-  </main>
+  <div class="order-2 order-md-1">
+    <header>
+      <Navbar />
+    </header>
+  </div>
+  <div class="order-1 order-md-2">
+    <main>
+      <router-view />
+    </main>
+  </div>
 </template>
 
 <script>
