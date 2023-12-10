@@ -1,10 +1,14 @@
 <template>
-  <div class="keep-card p-2 px-3 d-flex align-items-end" @click="openKeepDetails()">
-    <span class="d-flex align-items-center justify-content-between h-100 w-100">
-      <p class="fs-5 mb-0 p-1 rounded app-font light-shadow">{{ keep.name }}</p>
-      <img :src="keep.creator.picture" :alt="keep.creator.name" :title="keep.creator.name" type="button"
-        class="creator-img selectable rounded-circle" @click.stop="openProfile(keep.creatorId)">
-    </span>
+  <div class="position-relative">
+    <div class="keep-card" @click="openKeepDetails()">
+      <img class="keep-img rounded" :src="keep.img" :alt="keep.name">
+      <span class="keep-info d-flex align-items-center justify-content-between w-100 p-2 position-absolute">
+        <p class="fs-5 mb-0 ms-1 p-1 rounded app-font light-shadow">{{ keep.name }}</p>
+        <img :src="keep.creator.picture" :alt="keep.creator.name" :title="keep.creator.name" type="button"
+          class="creator-img selectable rounded-circle" @click.stop="openProfile(keep.creatorId)">
+      </span>
+    </div>
+    <DeleteItem :keep="keep" :itemType="'keep'" />
   </div>
 </template>
 
@@ -17,36 +21,34 @@ import { useRouter } from "vue-router";
 import { AppState } from '../AppState.js';
 import { Keep } from "../models/Keep.js";
 import { keepsService } from "../services/KeepsService.js";
+import { vaultKeepService } from "../services/VaultKeepService.js";
+import DeleteItem from "./DeleteItem.vue";
 
 export default {
   props: { keep: { type: Keep, required: true } },
   setup(props) {
     const router = useRouter();
-
     async function _getKeepById(keepId) {
       try { await keepsService.getKeepById(keepId); }
       catch (error) { Pop.error(error); }
     }
-
     return {
-      account: computed(() => AppState.account),
       keepImg: computed(() => `url('${props.keep?.img}')`),
-
       async openKeepDetails() {
         try {
+          // vaultKeepService.setVault();
           keepsService.setActiveKeep(props.keep);
           Modal.getOrCreateInstance('#keepDetail').show();
-          await _getKeepById(props.keep.id)
+          await _getKeepById(props.keep.id);
         }
         catch (error) { Pop.error(error); }
       },
-
       openProfile(profileId) {
-        router.push({ name: 'Profile', params: { profileId } })
-      }
-
-    }
-  }
+        router.push({ name: 'Profile', params: { profileId } });
+      },
+    };
+  },
+  components: { DeleteItem }
 };
 </script>
 
@@ -57,19 +59,27 @@ p {
 }
 
 .keep-card {
-  min-height: 15rem;
-  background-color: var(--color-3);
-  background-image: v-bind(keepImg);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+  width: 100%;
   border-radius: .5rem;
   box-shadow: 0 .25rem .5rem var(--color-5);
+  background-color: var(--color-3);
+  overflow: hidden;
+}
+
+.keep-img {
+  object-position: center;
+  object-fit: cover;
+  width: 100%;
   transition: .25s;
 }
 
-.keep-card:hover {
-  background-size: 105%;
+.keep-img:hover {
+  transform: scale(1.1);
+}
+
+.keep-info {
+  left: 0;
+  bottom: 0;
 }
 
 .light-shadow {

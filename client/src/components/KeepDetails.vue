@@ -46,11 +46,13 @@
 import Pop from "../utils/Pop.js";
 import { Modal } from "bootstrap";
 import { AppState } from '../AppState.js';
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { vaultsService } from "../services/VaultsService.js";
 
 export default {
   setup() {
+    const ogVault = ref('');
+
     async function _getMyVaults() {
       try { await vaultsService.getMyVaults(); }
       catch (error) { Pop.error(error); }
