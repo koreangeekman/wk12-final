@@ -23,12 +23,14 @@
           <div class="col-12 d-flex justify-content-between align-items-center px-4 py-1">
             <form v-if="myVaults?.length > 0" @submit.prevent="updateVault()" class="d-flex mx-3">
               <select type="text" class="form-select shadow" id="vault">
-                <option v-for="vault in myVaults" :value="vault.id">{{ vault.name }}</option>
+                <option v-for="vault in myVaults" :value="vault.id">
+                  {{ vault.name }} {{ vault.isPrivate ? '🔒' : '' }}
+                </option>
               </select>
               <button class="btn btn-success shadow text-light px-2 mx-1" type="submit">save</button>
             </form>
             <button v-else class="btn btn-secondary" @click="createVault()">create a vault</button>
-            <span class="d-flex align-items-center">
+            <span class="d-flex align-items-center" @click.stop="openProfile(keep.creatorId)">
               <img :src="activeKeep.creator.img" :alt="activeKeep.creator.name" class="creator-img shadow mx-2">
               <p class="mb-0 fw-bold d-none d-md-inline">{{ activeKeep.creator.name }}</p>
             </span>
@@ -73,6 +75,9 @@ export default {
       createVault() {
         Modal.getOrCreateInstance('#keepDetail').hide();
         Modal.getOrCreateInstance('#createVault').show();
+      },
+      openProfile(profileId) {
+        router.push({ name: 'Profile', params: { profileId } })
       }
     }
   }
@@ -84,8 +89,9 @@ export default {
 .keep-img {
   object-fit: cover;
   object-position: center;
+  border-radius: .4rem .4rem 0 0;
+  max-height: 50dvh;
   width: 100%;
-  border-radius: .5rem .5rem 0 0;
 }
 
 .creator-img {
@@ -121,7 +127,8 @@ export default {
 
 @media screen and (min-width: 768px) {
   .keep-img {
-    border-radius: .5rem 0 0 .5rem;
+    border-radius: .4rem 0 0 .4rem;
+    max-height: 90dvh;
   }
 }
 </style>
