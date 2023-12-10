@@ -1,5 +1,6 @@
 <template>
-  <div class="vault-card p-2 ps-3 d-flex align-items-end">
+  <div class="vault-card p-2 ps-3 d-flex flex-column justify-content-between">
+    <span><i v-if="vault.isPrivate" class="fs-3 text-secondary mdi mdi-lock"></i></span>
     <span class="d-flex align-items-center justify-content-between h-100 w-100">
       <p class="fs-4 mb-0 app-font">{{ vault.name }}</p>
       <img :src="vault.creator.picture" :alt="vault.creator.name" :title="vault.creator.name" class="creator-img">
@@ -29,6 +30,10 @@ export default {
 <style lang="scss" scoped>
 p {
   color: var(--color-1);
+}
+
+.mdi-lock {
+  text-shadow: 0 0 4px var(--color-6);
 }
 
 .vault-card {

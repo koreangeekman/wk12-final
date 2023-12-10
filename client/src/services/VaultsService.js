@@ -7,12 +7,14 @@ class VaultsService {
 
   async getVaults() {
     const res = await api.get('api/vaults');
-    AppState.vaults = res.data.map(vault => new Vault(vault));
+    const vaults = res.data.map(vault => new Vault(vault));
+    AppState.vaults = vaults.reverse();
   }
 
   async getMyVaults() {
     const res = await api.get('account/vaults');
-    AppState.myVaults = res.data.map(vault => new Vault(vault));
+    const vaults = res.data.map(vault => new Vault(vault));
+    AppState.myVaults = vaults.sort((a, b) => b.id - a.id);
   }
 
   async getVaultById(vaultId) {
@@ -29,7 +31,9 @@ class VaultsService {
     const res = await api.post('api/vaults', vaultData);
     const newVault = new Vault(res.data);
     AppState.activeVault = newVault;
-    AppState.vaults.push(newVault);
+    AppState.vaults.unshift(newVault);
+    AppState.myVaults.unshift(newVault);
+    // AppState.myVaults.sort();
   }
 
   async deleteVault(vaultId) {

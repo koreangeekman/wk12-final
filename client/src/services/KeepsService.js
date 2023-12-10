@@ -10,7 +10,7 @@ class KeepsService {
   async getKeeps() {
     AppState.keeps = [];
     const res = await api.get('api/keeps');
-    AppState.keeps = res.data.map(keep => new Keep(keep));
+    AppState.keeps = (res.data.map(keep => new Keep(keep))).sort((a, b) => b.id - a.id);
   }
 
   async getKeepById(keepId) {
@@ -21,20 +21,20 @@ class KeepsService {
   async getKeepsByProfileId(profileId) {
     AppState.keeps = [];
     const res = await api.get(`api/profile/${profileId}/keeps`);
-    AppState.keeps = res.data.map(keep => new Keep(keep));
+    AppState.keeps = (res.data.map(keep => new Keep(keep))).sort((a, b) => b.id - a.id);
   }
 
   async getKeepsByVaultId(vaultId) {
     AppState.keeps = [];
     const res = await api.get(`api/vaults/${vaultId}/keeps/`);
-    AppState.keeps = res.data.map(keep => new Keep(keep));
+    AppState.keeps = (res.data.map(keep => new Keep(keep))).sort((a, b) => b.id - a.id);
   }
 
   async createKeep(keepData) {
     const res = await api.post('api/keeps/', keepData)
     const newKeep = new Keep(res.data);
     AppState.activeKeep = newKeep;
-    AppState.keeps.push(newKeep);
+    AppState.keeps.unshift(newKeep);
   }
 
   async deleteKeep(keepId) {

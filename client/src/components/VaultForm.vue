@@ -7,8 +7,8 @@
       <input v-model="formData.img" type="url" id="img" class="form-control" placeholder="Image URL..." required>
     </div>
     <div class="mb-3">
-      <textarea v-model="formData.description" id="description" class="form-control" placeholder="Description..."
-        required></textarea>
+      <textarea v-model="formData.description" id="description" class="form-control" placeholder="Description..." required
+        rows="5"></textarea>
     </div>
     <span class="d-flex justify-content-between align-items-center">
       <div class="form-check ms-3 my-2">

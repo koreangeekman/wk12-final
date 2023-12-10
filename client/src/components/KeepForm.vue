@@ -13,7 +13,7 @@
         <div v-for="tag in tags" class="tag rounded-pill mx-2 my-1 px-2 py-1 bg-primary">{{ tag }}</div>
       </span>
     </div>
-    <textarea v-model="formData.description" name="description" id="description" rows="8" required class="form-control"
+    <textarea v-model="formData.description" name="description" id="description" rows="5" required class="form-control"
       placeholder="Description..."></textarea>
     <button class="btn btn-secondary mt-4 align-self-end" type="submit">Create</button>
   </form>
