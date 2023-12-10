@@ -20,13 +20,10 @@
 import KeepDetails from "../components/KeepDetails.vue";
 import KeepContainer from "../components/KeepContainer.vue";
 import ModalComponent from "../components/ModalComponent.vue";
-import { AppState } from "../AppState.js";
-import { computed } from "vue";
 
 export default {
   setup() {
     return {
-      activeKeep: computed(() => AppState.activeKeep),
     };
   },
   components: { ModalComponent, KeepContainer, KeepDetails }

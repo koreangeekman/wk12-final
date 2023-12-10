@@ -17,6 +17,11 @@ class KeepsService {
     AppState.activeKeep = new Keep(res.data);
   }
 
+  async getMyKeeps() {
+    const res = await api.get('account/keeps');
+    AppState.myKeeps = res.data.map(keep => new Keep(keep));
+  }
+
   async getKeepsByVaultId(vaultId) {
     AppState.vaultKeeps = [];
     const res = await api.get(`api/vaults/${vaultId}/keeps/`);

@@ -16,10 +16,12 @@ import { computed, onMounted } from 'vue';
 import { keepsService } from "../services/KeepsService.js";
 import { Profile } from "../models/Profile.js";
 import { Vault } from "../models/Vault.js";
+// import { Keep } from "../models/Keep.js";
 import KeepCard from "./KeepCard.vue";
 
 export default {
   props: {
+    // keeps: [{ type: Keep, default: null }],
     vault: { type: Vault, default: null },
     profile: { type: Profile, default: null },
   },
