@@ -1,11 +1,12 @@
 <template>
   <div class="position-relative">
-    <div class="vault-card selectable">
+    <div class="vault-card selectable" @click="openVaultDetails()">
       <img class="vault-img rounded" :src="vault.img" :alt="vault.name">
       <span class="vault-info d-flex align-items-center w-100 p-2 position-absolute">
         <p class="fs-4 mb-0 me-2 p-2 rounded app-font light-shadow">{{ vault.name.toUpperCase() }}</p>
         <img :src="vault.creator.picture" :alt="vault.creator.name" :title="vault.creator.name"
-          class="creator-img ms-auto" type="button" v-if="route.name == 'Vaults'">
+          class="creator-img ms-auto" type="button" v-if="route.name == 'Vaults'"
+          @click.stop="openProfile(vault.creatorId)">
       </span>
     </div>
     <span class="isPrivate position-absolute">
@@ -17,9 +18,10 @@
 
 
 <script>
-import { computed } from 'vue';
-import { useRoute } from "vue-router";
-import { AppState } from '../AppState';
+import Pop from "../utils/Pop.js";
+import { Modal } from "bootstrap";
+import { useRoute, useRouter } from "vue-router";
+import { vaultsService } from "../services/VaultsService.js";
 import { Vault } from "../models/Vault.js";
 import DeleteItem from "./DeleteItem.vue";
 
@@ -27,10 +29,21 @@ export default {
   props: { vault: { type: Vault, required: true } },
   setup(props) {
     const route = useRoute();
+    const router = useRouter();
     return {
       route,
-      account: computed(() => AppState.account),
-      vaultImg: computed(() => `url('${props.vault.img}')`),
+      async openVaultDetails() {
+        try {
+          // vaultKeepService.setVault();
+          vaultsService.setActiveVault(props.vault);
+          Modal.getOrCreateInstance('#vaultDetail').show();
+          await _getKeepById(props.keep.id);
+        }
+        catch (error) { Pop.error(error); }
+      },
+      openProfile(profileId) {
+        router.push({ name: 'Profile', params: { profileId } });
+      },
     };
   },
   components: { DeleteItem }

@@ -20,7 +20,7 @@ class KeepsService {
 
   async getKeepsByProfileId(profileId) {
     AppState.keeps = [];
-    const res = await api.get(`api/profile/${profileId}/keeps`);
+    const res = await api.get(`api/profiles/${profileId}/keeps`);
     AppState.keeps = (res.data.map(keep => new Keep(keep))).sort((a, b) => b.id - a.id);
   }
 

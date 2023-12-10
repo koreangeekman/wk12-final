@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid px-0 px-lg-5">
-    <section class="row justify-content-center px-1 px-lg-5 py-0 py-lg-4">
+    <section class="row justify-content-center px-1 px-lg-5">
       <div class="col-6 col-lg-4 col-xxl-3 py-3" v-for="keep in keeps" :key="keep.id">
         <KeepCard :keep="keep" />
       </div>
@@ -23,15 +23,15 @@ export default {
   },
   setup(props) {
     async function _getKeeps() {
-      try { keepsService.getKeeps(); }
+      try { await keepsService.getKeeps(); }
       catch (error) { Pop.error(error); }
     }
     async function _getKeepsByVaultId(vaultId) {
-      try { keepsService.getKeepsByVaultId(vaultId); }
+      try { await keepsService.getKeepsByVaultId(vaultId); }
       catch (error) { Pop.error(error); }
     }
     async function _getKeepsByProfileId(profileId) {
-      try { keepsService.getKeepsByProfileId(profileId); }
+      try { await keepsService.getKeepsByProfileId(profileId); }
       catch (error) { Pop.error(error); }
     }
     onMounted(() => {

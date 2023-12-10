@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid px-0 px-lg-5">
-    <section class="row justify-content-center px-1 px-lg-5 py-0 py-lg-4">
+    <section class="row justify-content-center px-1 px-lg-5">
       <div class="col-6 col-lg-4 col-xxl-3 py-3" v-for="vault in vaults" :key="vault.id">
         <VaultCard :vault="vault" />
       </div>
@@ -15,22 +15,29 @@ import { AppState } from '../AppState.js';
 import { computed, onMounted } from 'vue';
 import { vaultsService } from "../services/VaultsService.js";
 import VaultCard from "./VaultCard.vue";
+import { useRoute } from "vue-router";
+import { logger } from "../utils/Logger.js";
 
 export default {
   props: {
     profileId: { type: String, default: null },
   },
   setup(props) {
+    const route = useRoute();
     async function _getVaults() {
-      try { vaultsService.getVaults(); }
+      try { await vaultsService.getVaults(); }
       catch (error) { Pop.error(error); }
     }
     async function _getVaultsByProfileId(profileId) {
-      try { vaultsService.getVaultsByProfileId(profileId); }
+      try {
+        logger.log('profileId', profileId);
+        await vaultsService.getVaultsByProfileId(profileId);
+      }
       catch (error) { Pop.error(error); }
     }
     onMounted(() => {
-      if (props.profileId) { _getVaultsByProfileId(props.profileId); }
+      if (route.name == 'Account') { _getVaultsByProfileId(AppState.account.id); }
+      else if (route.name == 'Profile') { _getVaultsByProfileId(props.profileId); }
       else { _getVaults(); }
     })
     return {

@@ -16,7 +16,6 @@
 
 <script>
 import Pop from "../utils/Pop.js";
-import { computed } from 'vue';
 import { Modal } from "bootstrap";
 import { useRoute, useRouter } from "vue-router";
 import { keepsService } from "../services/KeepsService.js";
@@ -34,7 +33,6 @@ export default {
     }
     return {
       route,
-      keepImg: computed(() => `url('${props.keep?.img}')`),
       async openKeepDetails() {
         try {
           // vaultKeepService.setVault();
