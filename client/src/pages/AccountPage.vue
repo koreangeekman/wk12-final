@@ -23,7 +23,7 @@
         <p class="fs-1 fw-bold">Vaults</p>
         <section class="row">
           <div class="col-12 p-2">
-            <VaultContainer :profileId="activeProfile.id" />
+            <VaultContainer />
           </div>
         </section>
         <hr>
@@ -32,7 +32,7 @@
         <p class="fs-1 fw-bold">Keeps</p>
         <section class="row">
           <div class="col-12 p-2">
-            <KeepContainer :profileId="activeProfile.id" />
+            <KeepContainer />
           </div>
         </section>
         <hr>
@@ -45,7 +45,7 @@
 import Pop from "../utils/Pop.js";
 import { Modal } from "bootstrap";
 import { useRoute } from "vue-router";
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, watch } from 'vue';
 import { AppState } from '../AppState.js';
 import KeepContainer from "../components/KeepContainer.vue";
 import VaultContainer from "../components/VaultContainer.vue";
@@ -56,18 +56,17 @@ export default {
     const route = useRoute();
     async function _setProfile() {
       try {
-        if (route.name == 'Account') {
-          await accountService.setProfile(AppState.account.id);
-        }
-        else if (route.name == 'Profile') {
+        if (route.name == 'Profile') {
           await accountService.setProfile(route.params.profileId);
+        }
+        else if (route.name == 'Account') {
+          await accountService.setProfile(AppState.account.id);
         }
       }
       catch (error) { Pop.error(error); }
     }
-    onMounted(() => {
-      _setProfile();
-    })
+    onMounted(() => { _setProfile(); })
+    watch(route.name, _routeGetVaults)
     return {
       route,
       defaultImg: 'https://images.unsplash.com/photo-1663947718652-fa32fb546da2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0MHx8fGVufDB8fHx8fA%3D%3D',

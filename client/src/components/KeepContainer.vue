@@ -6,22 +6,30 @@
       </div>
     </section>
   </div>
+
+  <span>
+    <ModalComponent :modalId="'keepDetail'" :modalSize="'modal-xl'" :showHeader="false">
+      <template #modalBody>
+        <KeepDetails />
+      </template>
+    </ModalComponent>
+  </span>
 </template>
 
 
 <script>
 import Pop from "../utils/Pop.js";
+import { useRoute } from "vue-router";
+import { computed, onMounted, watch } from 'vue';
 import { AppState } from '../AppState.js';
-import { computed, onMounted } from 'vue';
 import { keepsService } from "../services/KeepsService.js";
+import ModalComponent from "../components/ModalComponent.vue";
+import KeepDetails from "../components/KeepDetails.vue";
 import KeepCard from "./KeepCard.vue";
 
 export default {
-  props: {
-    vaultId: { type: Number, default: null },
-    profileId: { type: String, default: null },
-  },
-  setup(props) {
+  setup() {
+    const route = useRoute();
     async function _getKeeps() {
       try { await keepsService.getKeeps(); }
       catch (error) { Pop.error(error); }
@@ -34,18 +42,20 @@ export default {
       try { await keepsService.getKeepsByProfileId(profileId); }
       catch (error) { Pop.error(error); }
     }
-    onMounted(() => {
-      if (props.profileId) { _getKeepsByProfileId(props.profileId); }
-      else if (props.vaultId) { _getKeepsByVaultId(props.vaultId); }
+    function _routeGetKeeps() {
+      if (route.name == 'Profile') { _getKeepsByProfileId(route.params.profileId); }
+      else if (route.name == 'Account') { _getKeepsByProfileId(AppState.account.id); }
+      else if (route.name == 'VaultDetails') { _getKeepsByVaultId(route.params.vaultId); }
       else { _getKeeps(); }
-    })
+    }
+    onMounted(() => { _routeGetKeeps(); })
+    watch(route.name, _routeGetKeeps)
     return {
-      account: computed(() => AppState.account),
       keeps: computed(() => AppState.keeps),
 
     }
   },
-  components: { KeepCard }
+  components: { KeepCard, ModalComponent, KeepDetails }
 };
 </script>
 

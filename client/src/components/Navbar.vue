@@ -39,11 +39,13 @@
       </div>
 
       <div class="w-100 d-flex justify-content-md-center order-1 order-md-2">
-        <p class="mb-0 px-1 rounded app-name app-logo app-font">
-          the <br>
-          keepr <br>
-          co.
-        </p>
+        <router-link class="navbar-brand d-flex" :to="{ name: 'Keeps' }">
+          <p class="mb-0 px-1 rounded app-name app-logo app-font">
+            the <br>
+            keepr <br>
+            co.
+          </p>
+        </router-link>
       </div>
       <div class="w-100 d-flex justify-content-end align-items-center order-3">
         <button class="btn mx-3" @click="toggleTheme">

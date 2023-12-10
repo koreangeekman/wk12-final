@@ -11,18 +11,18 @@
 
 <script>
 import Pop from "../utils/Pop.js";
+import { useRoute } from "vue-router";
+import { computed, onMounted, watch } from 'vue';
 import { AppState } from '../AppState.js';
-import { computed, onMounted } from 'vue';
+import { logger } from "../utils/Logger.js";
 import { vaultsService } from "../services/VaultsService.js";
 import VaultCard from "./VaultCard.vue";
-import { useRoute } from "vue-router";
-import { logger } from "../utils/Logger.js";
 
 export default {
   props: {
     profileId: { type: String, default: null },
   },
-  setup(props) {
+  setup() {
     const route = useRoute();
     async function _getVaults() {
       try { await vaultsService.getVaults(); }
@@ -35,13 +35,14 @@ export default {
       }
       catch (error) { Pop.error(error); }
     }
-    onMounted(() => {
-      if (route.name == 'Account') { _getVaultsByProfileId(AppState.account.id); }
-      else if (route.name == 'Profile') { _getVaultsByProfileId(props.profileId); }
+    function _routeGetVaults() {
+      if (route.name == 'Profile') { _getVaultsByProfileId(route.params.profileId); }
+      else if (route.name == 'Account') { _getVaultsByProfileId(AppState.account.id); }
       else { _getVaults(); }
-    })
+    }
+    onMounted(() => { _routeGetVaults(); })
+    watch(route.name, _routeGetVaults)
     return {
-      account: computed(() => AppState.account),
       vaults: computed(() => AppState.vaults),
 
     }
