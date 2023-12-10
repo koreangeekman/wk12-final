@@ -54,3 +54,13 @@ CREATE TABLE
         FOREIGN KEY (keepId) REFERENCES keeps(id) ON DELETE CASCADE,
         UNIQUE (vaultId, keepId)
     ) default charset utf8 COMMENT '';
+
+SELECT v.*, acc.*
+FROM vaults v
+    JOIN accounts acc ON acc.id = v.creatorId
+WHERE
+    isPrivate = false
+    OR (
+        v.creatorId = "65311cd2974eb0d9a0dbcb7e"
+        AND isPrivate = true
+    );

@@ -27,10 +27,29 @@ public class VaultsRepo
     return db.Query<Vault, Profile, Vault>(sql, PopulateCreator, new { vaultId }).FirstOrDefault();
   }
 
-  internal List<Vault> GetAllVaultsByProfileId(string profileId)
+  internal List<Vault> GetPublicVaults()
   {
-    string sql = "SELECT * FROM vaults WHERE creatorId = @ProfileId;";
-    return db.Query<Vault>(sql, new { profileId }).ToList();
+    string sql = @"
+        SELECT 
+        v.*,
+        acc.*
+        FROM vaults v
+        JOIN accounts acc ON acc.id = v.creatorId 
+        WHERE isPrivate = false;";
+    return db.Query<Vault, Profile, Vault>(sql, PopulateCreator).ToList();
+  }
+
+  internal List<Vault> GetMyPrivateAndAllPublicVaults(string profileId)
+  {
+    string sql = @"
+        SELECT 
+        v.*,
+        acc.*
+        FROM vaults v
+        JOIN accounts acc ON acc.id = v.creatorId 
+        WHERE (v.creatorId = @ProfileId AND isPrivate = true) 
+        OR isPrivate = false;";
+    return db.Query<Vault, Profile, Vault>(sql, PopulateCreator, new { profileId }).ToList();
   }
 
   internal List<Vault> GetPublicVaultsByProfileId(string profileId)
@@ -39,6 +58,12 @@ public class VaultsRepo
         SELECT * FROM vaults 
         WHERE creatorId = @ProfileId
         AND isPrivate = false;";
+    return db.Query<Vault>(sql, new { profileId }).ToList();
+  }
+
+  internal List<Vault> GetAllVaultsByProfileId(string profileId)
+  {
+    string sql = "SELECT * FROM vaults WHERE creatorId = @ProfileId;";
     return db.Query<Vault>(sql, new { profileId }).ToList();
   }
 

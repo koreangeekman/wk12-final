@@ -13,6 +13,17 @@ public class VaultsController : ControllerBase
     vaultsService = _vaultsService;
   }
 
+  [HttpGet]
+  public async Task<ActionResult<List<Vault>>> GetPublicVaults(int vaultId)
+  {
+    try
+    {
+      Account userInfo = await a0.GetUserInfoAsync<Account>(HttpContext);
+      return Ok(vaultsService.GetPublicVaults(userInfo?.Id, vaultId));
+    }
+    catch (Exception e) { return BadRequest(e.Message); }
+  }
+
   [HttpGet("{vaultId}")]
   public async Task<ActionResult<Vault>> GetVaultById(int vaultId)
   {

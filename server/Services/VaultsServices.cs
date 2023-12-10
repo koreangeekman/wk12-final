@@ -24,6 +24,13 @@ public class VaultsService
     return vaultKeepsRepo.GetKeepsByVaultId(vaultId);
   }
 
+  internal List<Vault> GetPublicVaults(string accountId, int vaultId)
+  {
+    if (accountId == null)
+    { return vaultsRepo.GetPublicVaults(); }
+    return vaultsRepo.GetMyPrivateAndAllPublicVaults(accountId);
+  }
+
   internal Vault CreateVault(Vault vaultData)
   { return vaultsRepo.CreateVault(vaultData); }
 
