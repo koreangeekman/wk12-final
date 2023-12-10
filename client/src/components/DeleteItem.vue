@@ -67,5 +67,6 @@ export default {
   font-size: x-large;
   box-shadow: 0 0 8px yellow inset;
   opacity: 1;
+  background-color: var(--color-3);
 }
 </style>

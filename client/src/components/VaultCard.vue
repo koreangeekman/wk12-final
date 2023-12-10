@@ -1,15 +1,15 @@
 <template>
   <div class="position-relative">
-    <div class="vault-card d-flex flex-column justify-content-between">
+    <div class="vault-card selectable">
       <img class="vault-img rounded" :src="vault.img" :alt="vault.name">
       <span class="vault-info d-flex align-items-center w-100 p-2 position-absolute">
         <p class="fs-4 mb-0 me-2 p-2 rounded app-font light-shadow">{{ vault.name.toUpperCase() }}</p>
         <img :src="vault.creator.picture" :alt="vault.creator.name" :title="vault.creator.name"
-          class="creator-img ms-auto" type="button">
+          class="creator-img ms-auto" type="button" v-if="route.name == 'Vaults'">
       </span>
     </div>
     <span class="isPrivate position-absolute">
-      <i v-if="vault.isPrivate" class="fs-1 text-dark mdi mdi-lock"></i>
+      <i v-if="vault.isPrivate" class="fs-1 text-dark mdi mdi-lock" title="Private Vault"></i>
     </span>
     <DeleteItem :vault="vault" :itemType="'vault'" />
   </div>
@@ -18,6 +18,7 @@
 
 <script>
 import { computed } from 'vue';
+import { useRoute } from "vue-router";
 import { AppState } from '../AppState';
 import { Vault } from "../models/Vault.js";
 import DeleteItem from "./DeleteItem.vue";
@@ -25,7 +26,9 @@ import DeleteItem from "./DeleteItem.vue";
 export default {
   props: { vault: { type: Vault, required: true } },
   setup(props) {
+    const route = useRoute();
     return {
+      route,
       account: computed(() => AppState.account),
       vaultImg: computed(() => `url('${props.vault.img}')`),
     };
@@ -50,7 +53,7 @@ p {
 }
 
 .vault-card {
-  min-height: 8rem;
+  min-height: 6rem;
   width: 100%;
   border-radius: .5rem;
   box-shadow: 0 .25rem .5rem var(--color-5);

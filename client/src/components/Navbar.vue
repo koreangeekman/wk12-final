@@ -4,7 +4,7 @@
       <div class="collapse navbar-collapse w-100 justify-content-md-end order-2 order-md-1" id="navbarText">
         <ul class="navbar-nav align-items-center w-100">
           <li class="nav-item">
-            <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
+            <router-link class="navbar-brand d-flex" :to="{ name: 'Keeps' }">
               <button class="btn selectable px-3 py-1 mx-1 bg-primary fw-bold" type="button">Keeps</button>
             </router-link>
           </li>

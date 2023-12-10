@@ -7,9 +7,9 @@ function loadPage(page) {
 
 const routes = [
   {
-    path: '/',
-    name: 'Home', // Keeps Page
-    component: loadPage('HomePage'),
+    path: '/', // "Home"
+    name: 'Keeps',
+    component: loadPage('KeepsPage'),
     beforeEnter: authSettled
   },
   {

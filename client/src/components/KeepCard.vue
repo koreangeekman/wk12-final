@@ -1,11 +1,12 @@
 <template>
   <div class="position-relative">
-    <div class="keep-card" @click="openKeepDetails()">
+    <div class="keep-card selectable" @click="openKeepDetails()">
       <img class="keep-img rounded" :src="keep.img" :alt="keep.name">
       <span class="keep-info d-flex align-items-center justify-content-between w-100 p-2 position-absolute">
         <p class="fs-5 mb-0 ms-1 p-1 rounded app-font light-shadow">{{ keep.name }}</p>
         <img :src="keep.creator.picture" :alt="keep.creator.name" :title="keep.creator.name" type="button"
-          class="creator-img selectable rounded-circle" @click.stop="openProfile(keep.creatorId)">
+          class="creator-img selectable rounded-circle" v-if="route.name == 'Keeps'"
+          @click.stop="openProfile(keep.creatorId)">
       </span>
     </div>
     <DeleteItem :keep="keep" :itemType="'keep'" />
@@ -15,24 +16,24 @@
 
 <script>
 import Pop from "../utils/Pop.js";
-import { Modal } from "bootstrap";
 import { computed } from 'vue';
-import { useRouter } from "vue-router";
-import { AppState } from '../AppState.js';
-import { Keep } from "../models/Keep.js";
+import { Modal } from "bootstrap";
+import { useRoute, useRouter } from "vue-router";
 import { keepsService } from "../services/KeepsService.js";
-import { vaultKeepService } from "../services/VaultKeepService.js";
+import { Keep } from "../models/Keep.js";
 import DeleteItem from "./DeleteItem.vue";
 
 export default {
   props: { keep: { type: Keep, required: true } },
   setup(props) {
+    const route = useRoute();
     const router = useRouter();
     async function _getKeepById(keepId) {
       try { await keepsService.getKeepById(keepId); }
       catch (error) { Pop.error(error); }
     }
     return {
+      route,
       keepImg: computed(() => `url('${props.keep?.img}')`),
       async openKeepDetails() {
         try {
