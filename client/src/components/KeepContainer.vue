@@ -20,7 +20,7 @@
 <script>
 import Pop from "../utils/Pop.js";
 import { useRoute } from "vue-router";
-import { computed, onMounted, watch } from 'vue';
+import { computed, onMounted } from 'vue';
 import { AppState } from '../AppState.js';
 import { keepsService } from "../services/KeepsService.js";
 import ModalComponent from "../components/ModalComponent.vue";
@@ -49,7 +49,6 @@ export default {
       else { _getKeeps(); }
     }
     onMounted(() => { _routeGetKeeps(); })
-    watch(route.name, _routeGetKeeps)
     return {
       keeps: computed(() => AppState.keeps),
 

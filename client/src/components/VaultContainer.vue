@@ -6,22 +6,28 @@
       </div>
     </section>
   </div>
+
+  <span>
+    <ModalComponent :modalId="'VaultDetail'" :modalSize="'modal-xl'" :showHeader="false">
+      <template #modalBody>
+        <VaultDetails />
+      </template>
+    </ModalComponent>
+  </span>
 </template>
 
 
 <script>
 import Pop from "../utils/Pop.js";
 import { useRoute } from "vue-router";
-import { computed, onMounted, watch } from 'vue';
+import { computed, onMounted } from 'vue';
 import { AppState } from '../AppState.js';
 import { logger } from "../utils/Logger.js";
 import { vaultsService } from "../services/VaultsService.js";
+import ModalComponent from "../components/ModalComponent.vue";
 import VaultCard from "./VaultCard.vue";
 
 export default {
-  props: {
-    profileId: { type: String, default: null },
-  },
   setup() {
     const route = useRoute();
     async function _getVaults() {
@@ -41,13 +47,12 @@ export default {
       else { _getVaults(); }
     }
     onMounted(() => { _routeGetVaults(); })
-    watch(route.name, _routeGetVaults)
     return {
       vaults: computed(() => AppState.vaults),
 
     }
   },
-  components: { VaultCard }
+  components: { VaultCard, ModalComponent }
 };
 </script>
 

@@ -13,8 +13,7 @@ import KeepContainer from "../components/KeepContainer.vue";
 
 export default {
   setup() {
-    return {
-    };
+    return {};
   },
   components: { KeepContainer }
 }
