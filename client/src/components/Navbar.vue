@@ -39,7 +39,7 @@
       </div>
 
       <div class="w-100 d-flex justify-content-md-center order-1 order-md-2">
-        <p class="mb-0 px-1 rounded app-name app-font">
+        <p class="mb-0 px-1 rounded app-name app-logo app-font">
           the <br>
           keepr <br>
           co.

@@ -1,9 +1,9 @@
 <template>
   <div class="vault-card p-2 ps-3 d-flex flex-column justify-content-between">
-    <span><i v-if="vault.isPrivate" class="fs-3 text-secondary mdi mdi-lock"></i></span>
-    <span class="d-flex align-items-center justify-content-between h-100 w-100">
-      <p class="fs-4 mb-0 app-font">{{ vault.name }}</p>
-      <img :src="vault.creator.picture" :alt="vault.creator.name" :title="vault.creator.name" class="creator-img">
+    <span><i v-if="vault.isPrivate" class="fs-1 text-dark mdi mdi-lock"></i></span>
+    <span class="d-flex align-items-center h-100 w-100">
+      <p class="fs-4 mb-0 me-2 p-2 rounded app-font light-shadow">{{ vault.name.toUpperCase() }}</p>
+      <img :src="vault.creator.picture" :alt="vault.creator.name" :title="vault.creator.name" class="creator-img ms-auto">
     </span>
   </div>
 </template>
@@ -33,7 +33,7 @@ p {
 }
 
 .mdi-lock {
-  text-shadow: 0 0 4px var(--color-6);
+  text-shadow: 0 0 1rem var(--color-1);
 }
 
 .vault-card {
@@ -52,9 +52,20 @@ p {
   background-size: 105%;
 }
 
+.light-shadow {
+  background-color: #80808080;
+  backdrop-filter: blur(2px);
+}
+
 .creator-img {
   border-radius: 50%;
   aspect-ratio: 1/1;
   height: 3rem;
+  transition: .25s;
+}
+
+.creator-img:hover {
+  transform: scale(108%);
+  box-shadow: 0 0 .25rem .25rem var(--color-4);
 }
 </style>

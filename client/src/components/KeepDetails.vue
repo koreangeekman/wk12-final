@@ -46,8 +46,7 @@
 import Pop from "../utils/Pop.js";
 import { Modal } from "bootstrap";
 import { AppState } from '../AppState.js';
-import { computed, onMounted, watch } from 'vue';
-import { keepsService } from "../services/KeepsService.js";
+import { computed, onMounted } from 'vue';
 import { vaultsService } from "../services/VaultsService.js";
 
 export default {
@@ -56,13 +55,6 @@ export default {
       try { await vaultsService.getMyVaults(); }
       catch (error) { Pop.error(error); }
     }
-    async function _getKeepById(keepId) {
-      try { await keepsService.getKeepById(keepId); }
-      catch (error) { Pop.error(error); }
-    }
-    watch(AppState.activeKeep, () => {
-      _getKeepById(AppState.activeKeep?.id);
-    })
 
     onMounted(() => {
       _getMyVaults();

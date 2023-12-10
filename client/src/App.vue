@@ -76,8 +76,13 @@ main {
   font-family: 'Marko One', serif;
   font-size: 1rem;
   font-weight: 400;
-  line-height: 1.25rem;
+  line-height: 1.5rem;
   letter-spacing: 0em;
+}
+
+.app-logo {
+  line-height: 1.28rem !important;
+  padding-top: 2px;
 }
 
 .light-shadow {

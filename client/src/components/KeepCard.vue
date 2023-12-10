@@ -1,7 +1,7 @@
 <template>
   <div class="keep-card p-2 px-3 d-flex align-items-end" @click="openKeepDetails()">
     <span class="d-flex align-items-center justify-content-between h-100 w-100">
-      <p class="fs-5 mb-0 app-font light-shadow">{{ keep.name }}</p>
+      <p class="fs-5 mb-0 p-1 rounded app-font light-shadow">{{ keep.name }}</p>
       <img :src="keep.creator.picture" :alt="keep.creator.name" :title="keep.creator.name" type="button"
         class="creator-img selectable rounded-circle" @click.stop="openProfile(keep.creatorId)">
     </span>
@@ -10,6 +10,7 @@
 
 
 <script>
+import Pop from "../utils/Pop.js";
 import { Modal } from "bootstrap";
 import { computed } from 'vue';
 import { useRouter } from "vue-router";
@@ -21,13 +22,23 @@ export default {
   props: { keep: { type: Keep, required: true } },
   setup(props) {
     const router = useRouter();
+
+    async function _getKeepById(keepId) {
+      try { await keepsService.getKeepById(keepId); }
+      catch (error) { Pop.error(error); }
+    }
+
     return {
       account: computed(() => AppState.account),
       keepImg: computed(() => `url('${props.keep?.img}')`),
 
-      openKeepDetails() {
-        keepsService.setActiveKeep(props.keep);
-        Modal.getOrCreateInstance('#keepDetail').show();
+      async openKeepDetails() {
+        try {
+          keepsService.setActiveKeep(props.keep);
+          Modal.getOrCreateInstance('#keepDetail').show();
+          await _getKeepById(props.keep.id)
+        }
+        catch (error) { Pop.error(error); }
       },
 
       openProfile(profileId) {
@@ -59,6 +70,11 @@ p {
 
 .keep-card:hover {
   background-size: 105%;
+}
+
+.light-shadow {
+  background-color: #80808080;
+  backdrop-filter: blur(2px);
 }
 
 .creator-img {
