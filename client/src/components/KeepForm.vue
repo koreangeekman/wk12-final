@@ -25,6 +25,7 @@ import { AppState } from '../AppState';
 import { computed, ref, watch } from 'vue';
 import Pop from "../utils/Pop.js";
 import { keepsService } from "../services/KeepsService.js";
+import { Modal } from "bootstrap";
 
 export default {
   setup() {
@@ -38,7 +39,9 @@ export default {
     })
 
     async function _createTag() {
-      try { await keepsService.createTag(formData.value); }
+      try {
+        await keepsService.createTag(formData.value);
+      }
       catch (error) { Pop.error(error); }
     }
 
@@ -48,7 +51,11 @@ export default {
       account: computed(() => AppState.account),
       tags: computed(() => AppState.tags),
       async createKeep() {
-        try { await keepsService.createKeep(formData.value); }
+        try {
+          await keepsService.createKeep(formData.value);
+          Modal.getInstance('#createKeep').hide();
+          formData.value = {};
+        }
         catch (error) { Pop.error(error); }
       },
     }

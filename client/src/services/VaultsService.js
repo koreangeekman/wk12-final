@@ -30,6 +30,7 @@ class VaultsService {
     const newVault = new Vault(res.data);
     AppState.activeVault = newVault;
     AppState.vaults.push(newVault);
+    AppState.myVaults.push(newVault);
   }
 
   async deleteVault(vaultId) {
