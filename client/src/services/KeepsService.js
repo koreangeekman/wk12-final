@@ -8,6 +8,7 @@ class KeepsService {
   setActiveKeep(keep) { AppState.activeKeep = keep; }
 
   async getKeeps() {
+    AppState.keeps = [];
     const res = await api.get('api/keeps');
     AppState.keeps = res.data.map(keep => new Keep(keep));
   }
@@ -17,15 +18,16 @@ class KeepsService {
     AppState.activeKeep = new Keep(res.data);
   }
 
-  async getMyKeeps() {
-    const res = await api.get('account/keeps');
-    AppState.myKeeps = res.data.map(keep => new Keep(keep));
+  async getKeepsByProfileId(profileId) {
+    AppState.keeps = [];
+    const res = await api.get(`api/profile/${profileId}/keeps`);
+    AppState.keeps = res.data.map(keep => new Keep(keep));
   }
 
   async getKeepsByVaultId(vaultId) {
-    AppState.vaultKeeps = [];
+    AppState.keeps = [];
     const res = await api.get(`api/vaults/${vaultId}/keeps/`);
-    AppState.vaultKeeps = res.data.map(keep => new Keep(keep));
+    AppState.keeps = res.data.map(keep => new Keep(keep));
   }
 
   async createKeep(keepData) {

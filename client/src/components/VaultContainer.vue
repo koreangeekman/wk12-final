@@ -14,31 +14,23 @@ import Pop from "../utils/Pop.js";
 import { AppState } from '../AppState.js';
 import { computed, onMounted } from 'vue';
 import { vaultsService } from "../services/VaultsService.js";
-import { Profile } from "../models/Profile.js";
 import VaultCard from "./VaultCard.vue";
-import { Account } from "../models/Account.js";
 
 export default {
   props: {
-    account: { type: Account, default: null },
-    profile: { type: Profile, default: null },
+    profileId: { type: String, default: null },
   },
   setup(props) {
     async function _getVaults() {
       try { vaultsService.getVaults(); }
       catch (error) { Pop.error(error); }
     }
-    async function _getVaultsByProfile(option) {
-      try { vaultsService.getVaults(option); }
-      catch (error) { Pop.error(error); }
-    }
-    async function _getVaultsByAccount(option) {
-      try { vaultsService.getVaults(option); }
+    async function _getVaultsByProfileId(profileId) {
+      try { vaultsService.getVaultsByProfileId(profileId); }
       catch (error) { Pop.error(error); }
     }
     onMounted(() => {
-      if (props.profile) { _getVaultsByProfile(); }
-      else if (props.account) { _getVaultsByAccount(); }
+      if (props.profileId) { _getVaultsByProfileId(props.profileId); }
       else { _getVaults(); }
     })
     return {

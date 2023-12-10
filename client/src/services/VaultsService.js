@@ -17,7 +17,7 @@ class VaultsService {
 
   async getMyVaults() {
     const res = await api.get('account/vaults');
-    AppState.myVaults = res.data.map(vault => new Vault(vault));
+    AppState.vaults = res.data.map(vault => new Vault(vault));
   }
 
   async getVaultsByProfileId(profileId) {
@@ -30,7 +30,6 @@ class VaultsService {
     const newVault = new Vault(res.data);
     AppState.activeVault = newVault;
     AppState.vaults.push(newVault);
-    AppState.myVaults.push(newVault);
   }
 
   async deleteVault(vaultId) {

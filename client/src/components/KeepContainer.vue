@@ -14,33 +14,29 @@ import Pop from "../utils/Pop.js";
 import { AppState } from '../AppState.js';
 import { computed, onMounted } from 'vue';
 import { keepsService } from "../services/KeepsService.js";
-import { Profile } from "../models/Profile.js";
-import { Vault } from "../models/Vault.js";
-// import { Keep } from "../models/Keep.js";
 import KeepCard from "./KeepCard.vue";
 
 export default {
   props: {
-    // keeps: [{ type: Keep, default: null }],
-    vault: { type: Vault, default: null },
-    profile: { type: Profile, default: null },
+    vaultId: { type: Number, default: null },
+    profileId: { type: String, default: null },
   },
   setup(props) {
     async function _getKeeps() {
       try { keepsService.getKeeps(); }
       catch (error) { Pop.error(error); }
     }
-    async function _getKeepsByProfile(option) {
-      try { keepsService.getKeeps(option); }
+    async function _getKeepsByVaultId(vaultId) {
+      try { keepsService.getKeepsByVaultId(vaultId); }
       catch (error) { Pop.error(error); }
     }
-    async function _getKeepsByAccount(option) {
-      try { keepsService.getKeeps(option); }
+    async function _getKeepsByProfileId(profileId) {
+      try { keepsService.getKeepsByProfileId(profileId); }
       catch (error) { Pop.error(error); }
     }
     onMounted(() => {
-      if (props.profile) { _getKeepsByProfile(); }
-      else if (props.vault) { _getKeepsByAccount(); }
+      if (props.profileId) { _getKeepsByProfileId(props.profileId); }
+      else if (props.vaultId) { _getKeepsByVaultId(props.vaultId); }
       else { _getKeeps(); }
     })
     return {

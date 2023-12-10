@@ -7,7 +7,7 @@
           <div class="position-absolute d-block text-center">
             <img :src="account.picture" :alt="account.name" class="user-image shadow">
             <p class="fs-1 mb-0"> {{ account.name }} </p>
-            <p class="mb-0"> {{ profile }} </p>
+            <p class="mb-0"> {{ }} </p>
           </div>
         </div>
       </div>
@@ -17,7 +17,7 @@
         <p class="fs-1 fw-bold">Vaults</p>
         <section class="row">
           <div class="col-6 col-md-4 p-2">
-            <VaultContainer :vaults="myVaults" />
+            <VaultContainer :profileId="account.id" />
           </div>
         </section>
       </div>
@@ -25,7 +25,7 @@
         <p class="fs-1 fw-bold">Keeps</p>
         <section class="row">
           <div class="col-6 col-md-4 p-2">
-            <KeepContainer :keeps="keeps" />
+            <KeepContainer :profileId="account.id" />
           </div>
         </section>
       </div>
@@ -34,32 +34,17 @@
 </template>
 
 <script>
-import Pop from "../utils/Pop.js";
 import { AppState } from '../AppState.js';
-import { computed, onMounted } from 'vue';
-import { vaultsService } from "../services/VaultsService.js";
-import { keepsService } from "../services/KeepsService.js";
+import { computed } from 'vue';
 import KeepContainer from "../components/KeepContainer.vue";
 import VaultContainer from "../components/VaultContainer.vue";
 
 export default {
   setup() {
-    async function _getMyVaults() {
-      try { await vaultsService.getMyVaults(); }
-      catch (error) { Pop.error(error); }
-    }
-    async function _getMyKeeps() {
-      try { await keepsService.getMyKeeps(); }
-      catch (error) { Pop.error(error); }
-    }
-    onMounted(() => {
-      _getMyVaults();
-      _getMyKeeps();
-    });
     return {
       account: computed(() => AppState.account),
-      myVaults: computed(() => AppState.myVaults),
-      myKeeps: computed(() => AppState.myKeeps),
+      vaults: computed(() => AppState.vaults),
+      keeps: computed(() => AppState.keeps),
     };
   },
   components: { VaultContainer, KeepContainer }
