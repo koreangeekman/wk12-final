@@ -13,7 +13,7 @@
               <button class="btn selectable px-3 py-1 mx-1 bg-primary fw-bold" type="button">Vaults</button>
             </router-link>
           </li>
-          <li class="nav-item dropdown d-none d-md-block">
+          <li v-if="account.id" class="nav-item dropdown d-none d-md-block">
             <button class="nav-link dropdown-toggle btn selectable px-3 py-1 fw-bold" data-bs-toggle="dropdown"
               role="button" aria-haspopup="true" aria-expanded="false">
               Create <small>▼</small>
@@ -64,8 +64,9 @@
 <script>
 import Login from './Login.vue';
 import { Modal } from "bootstrap";
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { loadState, saveState } from '../utils/Store.js';
+import { AppState } from "../AppState";
 
 export default {
   setup() {
@@ -83,6 +84,7 @@ export default {
         document.documentElement.setAttribute('data-bs-theme', theme.value)
         saveState('theme', theme.value)
       },
+      account: computed(() => AppState.account),
       createKeep() { Modal.getOrCreateInstance('#createKeep').show(); },
       createVault() { Modal.getOrCreateInstance('#createVault').show(); },
     }

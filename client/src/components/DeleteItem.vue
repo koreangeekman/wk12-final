@@ -1,5 +1,5 @@
 <template>
-  <div v-if="account.id == keep?.creatorId || account.id == vault?.creatorId"
+  <div v-if="account?.id && (account.id == keep?.creatorId || account.id == vault?.creatorId)"
     class="position-absolute deleteMe selectable rounded-circle">
     <i class="mdi mdi-delete-forever text-danger px-2" @click.stop="routeDelete()"></i>
   </div>

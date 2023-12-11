@@ -21,7 +21,7 @@
             <p class="fs-6 description">{{ activeKeep.description }}</p>
           </div>
           <div class="col-12 d-flex justify-content-between align-items-center px-4 py-1">
-            <form v-if="myVaults?.length > 0" @submit.prevent="updateVault()" class="d-flex mx-3">
+            <form v-if="account?.id && myVaults?.length > 0" @submit.prevent="updateVault()" class="d-flex mx-3">
               <select type="text" class="form-select shadow" id="vault">
                 <option v-for="vault in myVaults" :value="vault.id">
                   {{ vault.name }} {{ vault.isPrivate ? '🔒' : '' }}
@@ -29,7 +29,7 @@
               </select>
               <button class="btn btn-success shadow text-light px-2 mx-1" type="submit">save</button>
             </form>
-            <button v-else class="btn btn-secondary" @click="createVault()">create a vault</button>
+            <button v-else-if="account?.id" class="btn btn-secondary" @click="createVault()">create a vault</button>
             <span class="d-flex align-items-center" @click.stop="openProfile(activeKeep.creatorId)" type="button">
               <img :src="activeKeep.creator.img" :alt="activeKeep.creator.name" :title="activeKeep.creator.name"
                 class="creator-img shadow mx-2">
@@ -57,14 +57,6 @@ export default {
 
     const ogVault = ref('');
 
-    async function _getMyVaults() {
-      try { await vaultsService.getMyVaults(); }
-      catch (error) { Pop.error(error); }
-    }
-
-    onMounted(() => {
-      _getMyVaults();
-    })
     return {
       account: computed(() => AppState.account),
       myVaults: computed(() => AppState.myVaults),

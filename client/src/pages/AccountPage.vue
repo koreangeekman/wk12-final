@@ -37,7 +37,8 @@
     <section class="row justify-content-center mt-5">
       <div class="col-12 col-md-8 mt-5">
         <hr class="pb-3">
-        <p class="fs-1 fw-bold app-font">My Vaults</p>
+        <p v-if="account.id == activeProfile.id" class="fs-1 fw-bold app-font">My Vaults</p>
+        <p v-else class="fs-1 fw-bold app-font">{{ activeProfile.name.split('@')[0] }}'s Vaults</p>
         <section class="row">
           <div class="col-12 p-2">
             <VaultContainer />
@@ -46,7 +47,8 @@
         <hr>
       </div>
       <div class="col-12 col-md-8 pt-3">
-        <p class="fs-1 fw-bold app-font">My Keeps</p>
+        <p v-if="account.id == activeProfile.id" class="fs-1 fw-bold app-font">My Keeps</p>
+        <p v-else class="fs-1 fw-bold app-font">{{ activeProfile.name.split('@')[0] }}'s Keeps</p>
         <section class="row">
           <div class="col-12 p-2">
             <KeepContainer />

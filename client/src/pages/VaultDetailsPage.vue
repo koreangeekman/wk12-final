@@ -8,7 +8,8 @@
             <p class="mb-0 fs-2 text-nowrap">{{ activeVault.name }}</p>
             <p class="mb-0 fs-5">by {{ activeVault.creator.name }}</p>
           </div>
-          <div class="position-absolute vault-edit" v-if="route.name == 'VaultDetails'">
+          <div class="position-absolute vault-edit"
+            v-if="route.name == 'VaultDetails' && activeVault.creatorId == account.id">
             <i class="fs-5 mdi mdi-dots-horizontal rounded selectable px-1" title="Edit Vault"></i>
           </div>
         </div>
@@ -47,6 +48,7 @@ export default {
     }, { immediate: true });
     return {
       route,
+      account: computed(() => AppState.account),
       activeVault: computed(() => AppState.activeVault),
     };
   },
