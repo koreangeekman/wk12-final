@@ -17,28 +17,24 @@
           </li>
           <li v-if="account.id" class="nav-item dropdown d-none d-md-block">
             <button class="nav-link dropdown-toggle btn selectable px-3 py-1 fw-bold" data-bs-toggle="dropdown"
-              role="button" aria-haspopup="true" aria-expanded="false" aria-label="Drop-down menu">
+              role="button" aria-haspopup="true" aria-label="Drop-down create menu">
               Create <small>▼</small>
             </button>
             <div class="dropdown-menu">
-              <button class="dropdown-item" type="button" @click="createKeep()" aria-label="Create Keep">Create
-                Keep</button>
+              <button class="dropdown-item" @click="createKeep()" aria-label="Create Keep">Create Keep</button>
               <div class="dropdown-divider"></div>
-              <button class="dropdown-item" type="button" @click="createVault()" aria-label="Create Vault">Create
-                Vault</button>
+              <button class="dropdown-item" @click="createVault()" aria-label="Create Vault">Create Vault</button>
             </div>
           </li>
           <li class="nav-item dropup d-block d-md-none">
             <button class="nav-link dropdown-toggle btn selectable px-3 py-1 fw-bold" data-bs-toggle="dropdown"
-              role="button" aria-haspopup="true" aria-expanded="false" aria-label="Drop-up menu">
+              role="button" aria-haspopup="true" aria-label="Drop-up create menu">
               Create <small>▲</small>
             </button>
             <div class="dropdown-menu">
-              <button class="dropdown-item" type="button" @click="createKeep()" aria-label="Create Keep">Create
-                Keep</button>
+              <button class="dropdown-item" @click="createKeep()" aria-label="Create Keep">Create Keep</button>
               <div class="dropdown-divider"></div>
-              <button class="dropdown-item" type="button" @click="createVault()" aria-label="Create Vault">Create
-                Vault</button>
+              <button class="dropdown-item" @click="createVault()" aria-label="Create Vault">Create Vault</button>
             </div>
           </li>
         </ul>

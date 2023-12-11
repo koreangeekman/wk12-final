@@ -6,10 +6,11 @@
     </button>
     <div v-else>
       <div class="dropdown d-none d-md-block">
-        <div type="button" class="border-0 selectable rounded-circle no-select" data-bs-toggle="dropdown"
-          aria-expanded="false">
+        <div type="button" class="border-0 selectable rounded-circle no-select p-1" data-bs-toggle="dropdown"
+          aria-label="Account menu">
           <div v-if="account.picture || user.picture">
-            <img :src="account.picture || user.picture" alt="account photo" height="64" class="rounded-circle" />
+            <img :src="account.picture || user.picture" alt="account photo" title="Account photo"
+              aria-label="Account Photo" height="64" class="rounded-circle" />
           </div>
         </div>
         <div class="dropdown-menu dropdown-menu-sm-end dropdown-menu-start p-0" aria-labelledby="authDropdown">
@@ -27,10 +28,11 @@
         </div>
       </div>
       <div class="dropup d-block d-md-none my-2 my-lg-0">
-        <div type="button" class="border-0 selectable rounded-circle no-select" data-bs-toggle="dropdown"
-          aria-expanded="false">
+        <div type="button" class="border-0 selectable rounded-circle no-select p-1" data-bs-toggle="dropdown"
+          aria-label="Account menu">
           <div v-if="account.picture || user.picture">
-            <img :src="account.picture || user.picture" alt="account photo" height="64" class="rounded-circle" />
+            <img :src="account.picture || user.picture" alt="account photo" title="Account photo"
+              aria-label="Account Photo" height="64" class="rounded-circle" />
           </div>
         </div>
         <div class="dropdown-menu dropdown-menu-sm-end dropdown-menu-start p-0" aria-labelledby="authDropdown">
