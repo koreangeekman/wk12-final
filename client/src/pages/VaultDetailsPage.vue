@@ -24,23 +24,27 @@
 
 <script>
 import Pop from "../utils/Pop.js";
-import { useRoute } from "vue-router";
-import { computed, onMounted } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import { computed, watch } from "vue";
 import { AppState } from "../AppState.js";
 import { vaultsService } from "../services/VaultsService.js";
 import KeepContainer from "../components/KeepContainer.vue";
 
-
 export default {
   setup() {
     const route = useRoute();
+    const router = useRouter();
+    const watchVaultId = computed(() => route.params.vaultId);
     async function _getVaultById() {
       try { await vaultsService.getVaultById(route.params.vaultId); }
-      catch (error) { Pop.error(error); }
+      catch (error) {
+        if (error.response.data.includes('Id:')) { router.push({ name: 'Vaults' }); }
+        Pop.error(error);
+      }
     }
-    onMounted(() => {
+    watch(watchVaultId, () => {
       _getVaultById();
-    });
+    }, { immediate: true });
     return {
       activeVault: computed(() => AppState.activeVault),
     };

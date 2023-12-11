@@ -19,6 +19,7 @@ class VaultsService {
   }
 
   async getVaultById(vaultId) {
+    AppState.activeVault = null;
     const res = await api.get('api/vaults/' + vaultId);
     AppState.activeVault = new Vault(res.data);
   }

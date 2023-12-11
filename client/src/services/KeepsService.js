@@ -14,6 +14,7 @@ class KeepsService {
   }
 
   async getKeepById(keepId) {
+    AppState.activeKeep = null;
     const res = await api.get('api/keeps/' + keepId);
     AppState.activeKeep = new Keep(res.data);
   }
