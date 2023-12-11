@@ -71,29 +71,37 @@
 import Pop from "../utils/Pop.js";
 import { Modal } from "bootstrap";
 import { useRoute } from "vue-router";
-import { computed, onMounted } from 'vue';
+import { computed, watch } from 'vue';
 import { AppState } from '../AppState.js';
 import { accountService } from "../services/AccountService.js";
 import KeepContainer from "../components/KeepContainer.vue";
 import VaultContainer from "../components/VaultContainer.vue";
 import ModalComponent from "../components/ModalComponent.vue";
 import AccountForm from "../components/AccountForm.vue";
+import { router } from "../router";
 
 export default {
   setup() {
     const route = useRoute();
+    const watchRoute = computed(() => route.name);
+    const watchProfileId = computed(() => route.params.profileId);
     async function _setProfile() {
       try {
         if (route.name == 'Profile') {
           await accountService.setProfile(route.params.profileId);
         }
         else if (route.name == 'Account') {
-          await accountService.setProfile(AppState.account.id);
+          if (AppState.account.id) {
+            await accountService.setProfile(AppState.account.id);
+          } else {
+            router.push({ name: 'Keeps' });
+          }
         }
       }
       catch (error) { Pop.error(error); }
     }
-    onMounted(() => { _setProfile(); })
+    watch(watchRoute, _setProfile, { immediate: true })
+    watch(watchProfileId, _setProfile, { immediate: true })
     return {
       route,
       defaultImg: 'https://images.unsplash.com/photo-1663947718652-fa32fb546da2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0MHx8fGVufDB8fHx8fA%3D%3D',

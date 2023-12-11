@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <section v-if="activeVault" class="row justify-content-center">
-      <div class="col-4 d-flex p-0 mt-3">
+      <div class="col-5 d-flex p-0 mt-3">
         <div class="position-relative d-flex justify-content-center w-100">
           <img :src="activeVault.img" :alt="activeVault?.name" class="cover-img rounded">
           <div class="position-absolute d-block text-center rounded p-2 m-2 fw-bold app-font vault-info">
@@ -63,7 +63,7 @@ export default {
 
 .cover-img {
   width: 100%;
-  max-height: 50dvh;
+  max-height: 42dvh;
   object-fit: cover;
   object-position: center;
 }

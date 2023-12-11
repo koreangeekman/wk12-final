@@ -9,6 +9,7 @@
 <script>
 import Pop from "../utils/Pop.js";
 import { computed } from 'vue';
+import { useRoute } from "vue-router";
 import { AppState } from '../AppState.js';
 import { Vault } from "../models/Vault.js";
 import { Keep } from "../models/Keep.js";
@@ -22,7 +23,9 @@ export default {
     itemType: { type: String, required: true }
   },
   setup(props) {
+    const route = useRoute();
     return {
+      route,
       account: computed(() => AppState.account),
       routeDelete() {
         if (props.itemType == 'keep') {

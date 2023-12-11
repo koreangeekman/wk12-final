@@ -9,7 +9,7 @@
           @click.stop="openProfile(keep.creatorId)">
       </span>
     </div>
-    <DeleteItem :keep="keep" :itemType="'keep'" />
+    <DeleteItem v-if="route.name == 'Account' || route.name == 'VaultDetails'" :keep="keep" :itemType="'keep'" />
   </div>
 </template>
 
