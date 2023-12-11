@@ -5,12 +5,12 @@
         <ul class="navbar-nav align-items-center w-100">
           <li class="nav-item">
             <router-link class="navbar-brand d-flex" :to="{ name: 'Keeps' }">
-              <button class="btn selectable px-3 py-1 mx-1 bg-primary fw-bold" type="button">Keeps</button>
+              <button class="btn selectable px-3 py-1 mx-1 bg-secondary fw-bold" type="button">Keeps</button>
             </router-link>
           </li>
           <li class="nav-item">
             <router-link class="navbar-brand d-flex" :to="{ name: 'Vaults' }">
-              <button class="btn selectable px-3 py-1 mx-1 bg-primary fw-bold" type="button">Vaults</button>
+              <button class="btn selectable px-3 py-1 mx-1 bg-secondary fw-bold" type="button">Vaults</button>
             </router-link>
           </li>
           <li v-if="account.id" class="nav-item dropdown d-none d-md-block">
@@ -111,6 +111,10 @@ a:hover {
 .app-name {
   border: 2px solid;
   width: 4.5rem;
+}
+
+.bg-secondary {
+  background-color: var(--color-3) !important;
 }
 
 @media screen and (min-width: 576px) {
