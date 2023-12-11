@@ -2,7 +2,7 @@
   <div class="position-relative">
     <div class="keep-card selectable" @click="openKeepDetails(keep)">
       <img class="keep-img rounded" :src="keep.img" :alt="keep.name">
-      <span class="keep-info d-flex align-items-center justify-content-between w-100 p-2 position-absolute">
+      <span class="keep-info d-flex align-items-center justify-content-between w-100 py-2 px-md-2 position-absolute">
         <p class="fs-5 mb-0 ms-1 p-1 rounded app-font light-shadow">{{ keep.name }}</p>
         <img :src="keep.creator?.picture" :alt="keep.creator?.name" :title="keep.creator?.name" type="button"
           class="creator-img selectable rounded-circle" v-if="route.name == 'Keeps'"

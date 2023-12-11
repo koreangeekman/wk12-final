@@ -82,7 +82,7 @@ export default {
 
 <style lang="scss" scoped>
 .masonry {
-  columns: 15rem 2;
+  columns: 9.5rem 2;
 }
 
 @media screen and (min-width: 768px) {

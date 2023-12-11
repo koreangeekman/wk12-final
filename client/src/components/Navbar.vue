@@ -17,7 +17,7 @@
           </li>
           <li v-if="account.id" class="nav-item dropdown d-none d-md-block">
             <button class="nav-link dropdown-toggle btn selectable px-3 py-1 fw-bold" data-bs-toggle="dropdown"
-              role="button" aria-haspopup="true" aria-expanded="false">
+              role="button" aria-haspopup="true" aria-expanded="false" aria-label="Drop-down menu">
               Create <small>▼</small>
             </button>
             <div class="dropdown-menu">
@@ -30,7 +30,7 @@
           </li>
           <li class="nav-item dropup d-block d-md-none">
             <button class="nav-link dropdown-toggle btn selectable px-3 py-1 fw-bold" data-bs-toggle="dropdown"
-              role="button" aria-haspopup="true" aria-expanded="false">
+              role="button" aria-haspopup="true" aria-expanded="false" aria-label="Drop-up menu">
               Create <small>▲</small>
             </button>
             <div class="dropdown-menu">
@@ -54,7 +54,7 @@
         </router-link>
       </div>
       <div class="w-100 d-flex justify-content-end align-items-center order-3">
-        <button class="btn mx-3" @click="toggleTheme">
+        <button class="btn mx-3" @click="toggleTheme" type="button" aria-label="Toggle dark mode">
           <i class="fs-3 mdi" :class="theme == 'light' ? 'mdi-weather-sunny text-dark' : 'mdi-weather-night'"></i>
         </button>
         <Login />
