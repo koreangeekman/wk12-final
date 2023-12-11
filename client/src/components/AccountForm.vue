@@ -48,7 +48,7 @@
       </div>
 
       <div class="d-flex justify-content-center pe-3">
-        <button class="btn btn-success">Submit Changes</button>
+        <button class="btn btn-success" type="submit" aria-label="Submit Account Changes">Submit Changes</button>
       </div>
     </section>
   </form>

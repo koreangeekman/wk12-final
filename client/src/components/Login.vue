@@ -1,6 +1,7 @@
 <template>
   <span class="navbar-text">
-    <button class="btn selectable lighten-30 text-uppercase my-2 my-lg-0" @click="login" v-if="!user.isAuthenticated">
+    <button class="btn selectable lighten-30 text-uppercase my-2 my-lg-0" @click="login" v-if="!user.isAuthenticated"
+      type="button" aria-label="Log-in to the app">
       Login
     </button>
     <div v-else>

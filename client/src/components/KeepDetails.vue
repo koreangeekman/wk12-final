@@ -21,8 +21,8 @@
             <p class="fs-6 description">{{ activeKeep.description }}</p>
           </div>
           <div class="col-12 d-flex justify-content-between align-items-center px-4 py-1">
-            <button v-if="route.name == 'VaultDetails' && account?.id == activeVault?.creatorId" class="btn btn-secondary"
-              @click="removeFromVault()">
+            <button v-if="route.name == 'VaultDetails' && account?.id == activeVault?.creatorId"
+              @click="removeFromVault()" class="btn btn-secondary" type="button">
               <i class="mdi mdi-cancel mdi-rotate-90"></i> Remove from vault
             </button>
             <form v-else-if="(account?.id && myVaults?.length > 0)" @submit.prevent="addKeepToVault()"
@@ -32,9 +32,11 @@
                   {{ vault.name }} {{ vault.isPrivate ? '🔒' : '' }}
                 </option>
               </select>
-              <button class="btn btn-success shadow text-light px-2 mx-1" type="submit">save</button>
+              <button class="btn btn-success shadow text-light px-2 mx-1" type="submit"
+                aria-label="Add Keep to Vault">save</button>
             </form>
-            <button v-else-if="account?.id" class="btn btn-secondary" @click="createVault()">create a vault</button>
+            <button v-else-if="account?.id" @click="createVault()" class="btn btn-secondary" type="button"
+              aria-label="Create a vault">create a vault</button>
             <span class="d-flex align-items-center" @click.stop="openProfile(activeKeep.creatorId)" type="button">
               <img :src="activeKeep.creator.img" :alt="activeKeep.creator.name" :title="activeKeep.creator.name"
                 class="creator-img shadow mx-2">

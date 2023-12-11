@@ -16,7 +16,8 @@
         <label class="form-check-label" name="isPrivate" id="isPrivate">Make Vault Private?</label>
         <p class="mb-0 tiny">Private Vaults can only be seen by you</p>
       </div>
-      <button class="btn btn-secondary my-3 me-3 align-self-end" type="submit">Create</button>
+      <button class="btn btn-secondary my-3 me-3 align-self-end" type="submit"
+        aria-label="Create the Vault">Create</button>
     </span>
   </form>
 </template>

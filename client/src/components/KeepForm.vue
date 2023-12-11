@@ -15,7 +15,7 @@
     </div>
     <textarea v-model="formData.description" name="description" id="description" rows="5" required class="form-control"
       placeholder="Description..."></textarea>
-    <button class="btn btn-secondary mt-4 align-self-end" type="submit">Create</button>
+    <button class="btn btn-secondary mt-4 align-self-end" type="submit" aria-label="Create the Keep">Create</button>
   </form>
 </template>
 

@@ -5,12 +5,14 @@
         <ul class="navbar-nav align-items-center w-100">
           <li class="nav-item">
             <router-link class="navbar-brand d-flex" :to="{ name: 'Keeps' }">
-              <button class="btn selectable px-3 py-1 mx-1 bg-secondary fw-bold" type="button">Keeps</button>
+              <button class="btn selectable px-3 py-1 mx-1 bg-secondary fw-bold" type="button"
+                aria-label="Show Keeps">Keeps</button>
             </router-link>
           </li>
           <li class="nav-item">
             <router-link class="navbar-brand d-flex" :to="{ name: 'Vaults' }">
-              <button class="btn selectable px-3 py-1 mx-1 bg-secondary fw-bold" type="button">Vaults</button>
+              <button class="btn selectable px-3 py-1 mx-1 bg-secondary fw-bold" type="button"
+                aria-label="Show Vaults">Vaults</button>
             </router-link>
           </li>
           <li v-if="account.id" class="nav-item dropdown d-none d-md-block">
@@ -19,9 +21,11 @@
               Create <small>▼</small>
             </button>
             <div class="dropdown-menu">
-              <button class="dropdown-item" type="button" @click="createKeep()">Create Keep</button>
+              <button class="dropdown-item" type="button" @click="createKeep()" aria-label="Create Keep">Create
+                Keep</button>
               <div class="dropdown-divider"></div>
-              <button class="dropdown-item" type="button" @click="createVault()">Create Vault</button>
+              <button class="dropdown-item" type="button" @click="createVault()" aria-label="Create Vault">Create
+                Vault</button>
             </div>
           </li>
           <li class="nav-item dropup d-block d-md-none">
@@ -30,9 +34,11 @@
               Create <small>▲</small>
             </button>
             <div class="dropdown-menu">
-              <button class="dropdown-item" type="button" @click="createKeep()">Create Keep</button>
+              <button class="dropdown-item" type="button" @click="createKeep()" aria-label="Create Keep">Create
+                Keep</button>
               <div class="dropdown-divider"></div>
-              <button class="dropdown-item" type="button" @click="createVault()">Create Vault</button>
+              <button class="dropdown-item" type="button" @click="createVault()" aria-label="Create Vault">Create
+                Vault</button>
             </div>
           </li>
         </ul>

@@ -13,8 +13,8 @@
         </div>
         <div v-if="showFooter" class="modal-footer">
           <slot name="modalFooter">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
+            <button type="button" class="btn btn-primary" aria-label="Save changes">Save changes</button>
           </slot>
         </div>
       </div>
