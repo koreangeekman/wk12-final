@@ -21,8 +21,13 @@
             <p class="fs-6 description">{{ activeKeep.description }}</p>
           </div>
           <div class="col-12 d-flex justify-content-between align-items-center px-4 py-1">
-            <form v-if="account?.id && myVaults?.length > 0" @submit.prevent="updateVault()" class="d-flex mx-3">
-              <select type="text" class="form-select shadow" id="vault">
+            <button v-if="route.name == 'VaultDetails' && account?.id == activeVault?.creatorId" class="btn btn-secondary"
+              @click="removeFromVault()">
+              <i class="mdi mdi-cancel mdi-rotate-90"></i> Remove
+            </button>
+            <form v-else-if="(account?.id && myVaults?.length > 0)" @submit.prevent="addKeepToVault()"
+              class="d-flex mx-3">
+              <select v-model="selectedVault.vaultId" type="text" class="form-select shadow" id="vault">
                 <option v-for="vault in myVaults" :value="vault.id">
                   {{ vault.name }} {{ vault.isPrivate ? '🔒' : '' }}
                 </option>
@@ -33,7 +38,7 @@
             <span class="d-flex align-items-center" @click.stop="openProfile(activeKeep.creatorId)" type="button">
               <img :src="activeKeep.creator.img" :alt="activeKeep.creator.name" :title="activeKeep.creator.name"
                 class="creator-img shadow mx-2">
-              <p class="mb-0 fw-bold d-none d-md-inline">{{ activeKeep.creator.name }}</p>
+              <p class="mb-0 fw-bold d-none d-md-inline">{{ activeKeep.creator.name.split('@')[0] }}</p>
             </span>
           </div>
         </section>
@@ -44,23 +49,31 @@
 
 
 <script>
-import Pop from "../utils/Pop.js";
+import Pop from "../utils/Pop";
 import { Modal } from "bootstrap";
 import { AppState } from '../AppState.js';
-import { computed, onMounted, ref } from 'vue';
-import { vaultsService } from "../services/VaultsService.js";
-import { useRouter } from "vue-router";
+import { computed, onMounted, ref, watchEffect } from 'vue';
+import { useRoute, useRouter } from "vue-router";
+import { vaultKeepService } from "../services/VaultKeepService.js";
 
 export default {
   setup() {
+    const route = useRoute();
     const router = useRouter();
 
-    const ogVault = ref('');
+    const selectedVault = ref({});
+
+    // watchEffect(() => {
+    //   _checkVaults(AppState.myVaultKeeps)
+    // })
 
     return {
+      route,
+      selectedVault,
       account: computed(() => AppState.account),
       myVaults: computed(() => AppState.myVaults),
       activeKeep: computed(() => AppState.activeKeep),
+      activeVault: computed(() => AppState.activeVault),
 
       createVault() {
         Modal.getOrCreateInstance('#keepDetail').hide();
@@ -69,6 +82,23 @@ export default {
       openProfile(profileId) {
         Modal.getOrCreateInstance('#keepDetail').hide();
         router.push({ name: 'Profile', params: { profileId } })
+      },
+      async addKeepToVault() {
+        try {
+          selectedVault.value.keepId = this.activeKeep.id;
+          await vaultKeepService.createVaultKeep(selectedVault.value);
+          this.activeKeep.kept++;
+        }
+        catch (error) {
+          if (error.response.data.includes('Duplicate')) {
+            Pop.error('Already saved')
+          }
+          Pop.error(error);
+        }
+      },
+      async removeFromVault() {
+        try { await vaultKeepService.deleteVaultKeep(this.activeKeep.vaultKeepId) }
+        catch (error) { Pop.error(error); }
       }
     }
   }

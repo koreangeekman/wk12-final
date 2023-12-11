@@ -10,12 +10,12 @@
             <span class="hidden">
               <p class="pt-3" v-if="activeProfile.bio">{{ activeProfile.bio }}</p>
               <div class="fs-1 socials d-flex justify-content-center p-3 mb-3">
-                <a :href="activeProfile.github" v-if="activeProfile.github" target="_blank"><i class="p-3 mdi mdi-github"
-                    title="icon for github"></i></a>
-                <a :href="activeProfile.linkedin" v-if="activeProfile.linkedin" target="_blank"><i
-                    class="p-3 mdi mdi-linkedin" title="icon for linked"></i></a>
-                <a :href="activeProfile.website" v-if="activeProfile.website" target="_blank"><i class="p-3 mdi mdi-web"
-                    title="icon for the user's website"></i></a>
+                <a :href="activeProfile.github" v-if="activeProfile.github" target="_blank">
+                  <i class="p-3 mdi mdi-github" title="icon for github"></i></a>
+                <a :href="activeProfile.linkedin" v-if="activeProfile.linkedin" target="_blank">
+                  <i class="p-3 mdi mdi-linkedin" title="icon for linked"></i></a>
+                <a :href="activeProfile.website" v-if="activeProfile.website" target="_blank">
+                  <i class="p-3 mdi mdi-web" title="icon for the user's website"></i></a>
               </div>
             </span>
             <img :src="activeProfile.picture" :alt="activeProfile.name" class="user-image">

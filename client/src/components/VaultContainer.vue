@@ -19,7 +19,7 @@
 <script>
 import Pop from "../utils/Pop.js";
 import { useRoute } from "vue-router";
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, watch } from 'vue';
 import { AppState } from '../AppState.js';
 import { logger } from "../utils/Logger.js";
 import { vaultsService } from "../services/VaultsService.js";
@@ -28,6 +28,7 @@ import VaultCard from "./VaultCard.vue";
 export default {
   setup() {
     const route = useRoute();
+    const account = computed(() => AppState.account);
     async function _getVaults() {
       try { await vaultsService.getVaults(); }
       catch (error) { Pop.error(error); }
@@ -45,6 +46,7 @@ export default {
       else { _getVaults(); }
     }
     onMounted(() => { _routeGetVaults(); })
+    watch(account, _routeGetVaults);
     return {
       route,
       vaults: computed(() => AppState.vaults),

@@ -21,6 +21,9 @@ export const AppState = reactive({
   /** @type {import('./models/Keep.js').Keep} */
   activeKeep: null,
 
+  /** @type {import('./models/VaultKeep.js').VaultKeep[]} */
+  myVaultKeeps: [],
+
   ogVault: null // keep form vault value comparison check
 
 })
