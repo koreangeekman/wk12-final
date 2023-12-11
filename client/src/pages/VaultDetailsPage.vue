@@ -1,28 +1,71 @@
 <template>
   <div class="container-fluid">
-    <section class="row justify-content-center">
-      <div class="col-12">
-        <div class="cover-image">
-        </div>
-        <div class="position-relative d-flex justify-content-center">
-          <div class="position-absolute d-block text-center user-profile">
+    <section v-if="activeVault" class="row justify-content-center">
+      <div class="col-4 d-flex p-0 mt-3">
+        <div class="position-relative d-flex justify-content-center w-100">
+          <img :src="activeVault.img" :alt="activeVault?.name" class="cover-img rounded">
+          <div class="position-absolute d-block text-center rounded p-2 m-2 fw-bold app-font vault-info">
+            <p class="mb-0 fs-2 text-nowrap">{{ activeVault.name }}</p>
+            <p class="mb-0 fs-5">by {{ activeVault.creator.name }}</p>
           </div>
           <!-- <div class="position-absolute user-edit" v-if="route.name == 'Account'"> -->
-          <i class="fs-1 mdi mdi-dots-horizontal btn selectable py-0 my-2" @click="editAccount()"></i>
+          <!-- <i class="fs-1 mdi mdi-dots-horizontal btn selectable py-0 my-2"></i> -->
           <!-- </div> -->
         </div>
+      </div>
+    </section>
+    <section class="row justify-content-center">
+      <div class="col-12 col-md-10">
+        <KeepContainer />
       </div>
     </section>
   </div>
 </template>
 
 <script>
+import Pop from "../utils/Pop.js";
+import { useRoute } from "vue-router";
+import { computed, onMounted } from "vue";
+import { AppState } from "../AppState.js";
+import { vaultsService } from "../services/VaultsService.js";
+import KeepContainer from "../components/KeepContainer.vue";
+
 
 export default {
   setup() {
-    return {};
+    const route = useRoute();
+    async function _getVaultById() {
+      try { await vaultsService.getVaultById(route.params.vaultId); }
+      catch (error) { Pop.error(error); }
+    }
+    onMounted(() => {
+      _getVaultById();
+    });
+    return {
+      activeVault: computed(() => AppState.activeVault),
+    };
   },
+  components: { KeepContainer }
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.app-font {
+  line-height: 2.4rem;
+}
+
+.cover-img {
+  width: 100%;
+  max-height: 50dvh;
+  object-fit: cover;
+  object-position: center;
+}
+
+.vault-info {
+  bottom: 0;
+  color: white;
+  text-shadow: 0 0 .5rem black;
+  backdrop-filter: blur(2px);
+  border: 1px solid white;
+}
+</style>

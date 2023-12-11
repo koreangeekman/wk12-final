@@ -1,9 +1,22 @@
 <template>
   <div class="px-0 px-xl-5">
-    <p class="mb-0 mt-3 py-2 fs-3 text-center app-font">ALL KEEPS</p>
-    <section class="masonry px-1 px-lg-5">
+    <p v-if="route.name == 'VaultDetails'" class="mb-0 mt-3 py-2 fs-3 text-center app-font">VAULT KEEPS</p>
+    <p v-else class="mb-0 mt-3 py-2 fs-3 text-center app-font">ALL KEEPS</p>
+    <section v-if="keeps.length > 0" class="masonry px-1 px-lg-5">
       <div class="w-100 py-3" v-for="keep in keeps" :key="keep.id">
         <KeepCard :keep="keep" />
+      </div>
+    </section>
+    <section v-else-if="route.name == 'VaultDetails'" class="py-5 px-1 px-lg-5 text-center">
+      <p class="fs-5 mb-5">(No Keeps yet)</p>
+      <router-link :to="{ name: 'Keeps' }">
+        <button class="btn btn-primary fs-4">Add Keeps</button>
+      </router-link>
+    </section>
+    <section v-else class="">
+      <div class="d-flex justify-content-center py-5">
+        <p class="fs-1"> Loading </p>
+        <i class="mdi mdi-loading mdi-spin fs-1"></i>
       </div>
     </section>
   </div>
@@ -51,6 +64,7 @@ export default {
     }
     onMounted(() => { _routeGetKeeps(); })
     return {
+      route,
       keeps: computed(() => AppState.keeps),
 
     }

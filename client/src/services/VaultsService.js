@@ -6,6 +6,7 @@ import { api } from "./AxiosService.js";
 class VaultsService {
 
   async getVaults() {
+    AppState.vaults = [];
     const res = await api.get('api/vaults');
     const vaults = res.data.map(vault => new Vault(vault));
     AppState.vaults = vaults.reverse();
@@ -23,6 +24,7 @@ class VaultsService {
   }
 
   async getVaultsByProfileId(profileId) {
+    AppState.vaults = [];
     const res = await api.get(`api/profiles/${profileId}/vaults`);
     AppState.vaults = res.data.map(vault => new Vault(vault));
   }
