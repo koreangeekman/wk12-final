@@ -8,18 +8,23 @@
         <div class="position-relative d-flex justify-content-center">
           <div class="position-absolute d-block text-center user-profile">
             <span class="hidden">
-              <p class="pt-3">{{ activeProfile.bio }}</p>
+              <p class="pt-3" v-if="activeProfile.bio">{{ activeProfile.bio }}</p>
               <div class="fs-1 socials d-flex justify-content-center p-3 mb-3">
-                <a :href="activeProfile.github" target="_blank"><i class="p-3 mdi mdi-github"
+                <a :href="activeProfile.github" v-if="activeProfile.github" target="_blank"><i class="p-3 mdi mdi-github"
                     title="icon for github"></i></a>
-                <a :href="activeProfile.linkedin" target="_blank"><i class="p-3 mdi mdi-linkedin"
-                    title="icon for linked"></i></a>
-                <a :href="activeProfile.website" target="_blank"><i class="p-3 mdi mdi-web"
+                <a :href="activeProfile.linkedin" v-if="activeProfile.linkedin" target="_blank"><i
+                    class="p-3 mdi mdi-linkedin" title="icon for linked"></i></a>
+                <a :href="activeProfile.website" v-if="activeProfile.website" target="_blank"><i class="p-3 mdi mdi-web"
                     title="icon for the user's website"></i></a>
               </div>
             </span>
             <img :src="activeProfile.picture" :alt="activeProfile.name" class="user-image">
             <p class="fs-1 mb-0"> {{ activeProfile.name }} </p>
+            <span class="d-flex justify-content-center w-100">
+              <p class="mb-0">{{ vaults.length }} Vault{{ vaults.length > 1 ? 's' : '' }}</p>
+              <p class="mb-0 mx-2"> | </p>
+              <p class="mb-0">{{ keeps.length }} Keep{{ keeps.length > 1 ? 's' : '' }}</p>
+            </span>
           </div>
           <div class="position-absolute d-block text-center user-profile">
           </div>
@@ -31,8 +36,8 @@
     </section>
     <section class="row justify-content-center mt-5">
       <div class="col-12 col-md-8 mt-5">
-        <hr>
-        <p class="fs-1 fw-bold">Vaults</p>
+        <hr class="pb-3">
+        <p class="fs-1 fw-bold app-font">My Vaults</p>
         <section class="row">
           <div class="col-12 p-2">
             <VaultContainer />
@@ -40,8 +45,8 @@
         </section>
         <hr>
       </div>
-      <div class="col-12 col-md-8">
-        <p class="fs-1 fw-bold">Keeps</p>
+      <div class="col-12 col-md-8 pt-3">
+        <p class="fs-1 fw-bold app-font">My Keeps</p>
         <section class="row">
           <div class="col-12 p-2">
             <KeepContainer />
@@ -52,7 +57,7 @@
     </section>
   </div>
   <span>
-    <ModalComponent :modalId="'editAccount'" :modalSize="'modal-xl'" :showHeader="false">
+    <ModalComponent :modalId="'editAccount'" :modalSize="'modal-lg'" :showHeader="false">
       <template #modalBody>
         <AccountForm />
       </template>
@@ -110,7 +115,7 @@ img {
 }
 
 .user-profile {
-  bottom: -5rem;
+  bottom: -6.4rem;
 }
 
 .user-edit {

@@ -31,7 +31,8 @@
             </form>
             <button v-else class="btn btn-secondary" @click="createVault()">create a vault</button>
             <span class="d-flex align-items-center" @click.stop="openProfile(activeKeep.creatorId)" type="button">
-              <img :src="activeKeep.creator.img" :alt="activeKeep.creator.name" class="creator-img shadow mx-2">
+              <img :src="activeKeep.creator.img" :alt="activeKeep.creator.name" :title="activeKeep.creator.name"
+                class="creator-img shadow mx-2">
               <p class="mb-0 fw-bold d-none d-md-inline">{{ activeKeep.creator.name }}</p>
             </span>
           </div>

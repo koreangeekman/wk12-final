@@ -8,9 +8,9 @@
             <p class="mb-0 fs-2 text-nowrap">{{ activeVault.name }}</p>
             <p class="mb-0 fs-5">by {{ activeVault.creator.name }}</p>
           </div>
-          <!-- <div class="position-absolute user-edit" v-if="route.name == 'Account'"> -->
-          <!-- <i class="fs-1 mdi mdi-dots-horizontal btn selectable py-0 my-2"></i> -->
-          <!-- </div> -->
+          <div class="position-absolute vault-edit" v-if="route.name == 'VaultDetails'">
+            <i class="fs-5 mdi mdi-dots-horizontal rounded selectable px-1" title="Edit Vault"></i>
+          </div>
         </div>
       </div>
     </section>
@@ -46,6 +46,7 @@ export default {
       _getVaultById();
     }, { immediate: true });
     return {
+      route,
       activeVault: computed(() => AppState.activeVault),
     };
   },
@@ -71,5 +72,11 @@ export default {
   text-shadow: 0 0 .5rem black;
   backdrop-filter: blur(2px);
   border: 1px solid white;
+}
+
+.vault-edit {
+  bottom: -1.6rem;
+  right: 0rem;
+  line-height: 1rem;
 }
 </style>

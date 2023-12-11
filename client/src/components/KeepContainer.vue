@@ -1,7 +1,13 @@
 <template>
   <div class="px-0 px-xl-5">
-    <p v-if="route.name == 'VaultDetails'" class="mb-0 mt-3 py-2 fs-3 text-center app-font">VAULT KEEPS</p>
-    <p v-else class="mb-0 mt-3 py-2 fs-3 text-center app-font">ALL KEEPS</p>
+    <p class="mb-0 mt-3 py-2 fs-3 text-center app-font"></p>
+    <span v-if="route.name == 'VaultDetails' || route.name == 'Vaults'" class="">
+      <p v-if="route.name == 'VaultDetails'" class="mb-0 mt-3 py-2 fs-3 text-center app-font">VAULT KEEPS</p>
+      <p v-else class="mb-0 mt-3 py-2 fs-3 text-center app-font">ALL KEEPS</p>
+      <p v-if="keeps.length > 0" class="mb-0fs-6 text-center app-font">
+        {{ keeps.length }} Keep{{ keeps.length > 1 ? 's' : '' }}
+      </p>
+    </span>
     <section v-if="keeps.length > 0" class="masonry px-1 px-lg-5">
       <div class="w-100 py-3" v-for="keep in keeps" :key="keep.id">
         <KeepCard :keep="keep" />

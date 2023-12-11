@@ -1,6 +1,6 @@
 <template>
   <div class="px-0 px-xl-5">
-    <p class="mb-0 mt-3 py-2 fs-3 text-center app-font">ALL ACCESSIBLE VAULTS</p>
+    <p v-if="route.name == 'Vaults'" class="mb-0 mt-3 py-2 fs-3 text-center app-font">ALL ACCESSIBLE VAULTS</p>
     <section v-if="vaults.length > 0" class="masonry px-1 px-xl-5">
       <div class="w-100 py-3" v-for="vault in vaults" :key="vault.id">
         <VaultCard :vault="vault" />
@@ -46,6 +46,7 @@ export default {
     }
     onMounted(() => { _routeGetVaults(); })
     return {
+      route,
       vaults: computed(() => AppState.vaults),
 
     }
