@@ -16,7 +16,7 @@
     <section v-else-if="route.name == 'VaultDetails'" class="py-5 px-1 px-lg-5 text-center">
       <p class="fs-5 mb-5">(No Keeps yet)</p>
       <router-link :to="{ name: 'Keeps' }">
-        <button class="btn btn-primary fs-4" type="button" aria-label="Add a Keep">Add Keeps</button>
+        <button class="btn btn-primary fs-4" type="button" title="Add a Keep" aria-label="Add a Keep">Add Keeps</button>
       </router-link>
     </section>
     <section v-else class="">

@@ -5,36 +5,40 @@
         <ul class="navbar-nav align-items-center w-100">
           <li class="nav-item">
             <router-link class="navbar-brand d-flex" :to="{ name: 'Keeps' }">
-              <button class="btn selectable px-3 py-1 mx-1 bg-secondary fw-bold" type="button"
+              <button class="btn selectable px-3 py-1 mx-1 bg-secondary fw-bold" type="button" title="Show Keeps"
                 aria-label="Show Keeps">Keeps</button>
             </router-link>
           </li>
           <li class="nav-item">
             <router-link class="navbar-brand d-flex" :to="{ name: 'Vaults' }">
-              <button class="btn selectable px-3 py-1 mx-1 bg-secondary fw-bold" type="button"
+              <button class="btn selectable px-3 py-1 mx-1 bg-secondary fw-bold" type="button" title="Show Vaults"
                 aria-label="Show Vaults">Vaults</button>
             </router-link>
           </li>
           <li v-if="account.id" class="nav-item dropdown d-none d-md-block">
             <button class="nav-link dropdown-toggle btn selectable px-3 py-1 fw-bold" data-bs-toggle="dropdown"
-              role="button" aria-haspopup="true" aria-label="Drop-down create menu">
+              role="button" aria-haspopup="true" title="Drop-down create menu" aria-label="Drop-down create menu">
               Create <small>▼</small>
             </button>
             <div class="dropdown-menu">
-              <button class="dropdown-item" @click="createKeep()" aria-label="Create Keep">Create Keep</button>
+              <button class="dropdown-item" @click="createKeep()" title="Create Keep" aria-label="Create Keep">Create
+                Keep</button>
               <div class="dropdown-divider"></div>
-              <button class="dropdown-item" @click="createVault()" aria-label="Create Vault">Create Vault</button>
+              <button class="dropdown-item" @click="createVault()" title="Create Vault" aria-label="Create Vault">Create
+                Vault</button>
             </div>
           </li>
           <li class="nav-item dropup d-block d-md-none">
             <button class="nav-link dropdown-toggle btn selectable px-3 py-1 fw-bold" data-bs-toggle="dropdown"
-              role="button" aria-haspopup="true" aria-label="Drop-up create menu">
+              role="button" aria-haspopup="true" title="Drop-up create menu" aria-label="Drop-up create menu">
               Create <small>▲</small>
             </button>
             <div class="dropdown-menu">
-              <button class="dropdown-item" @click="createKeep()" aria-label="Create Keep">Create Keep</button>
+              <button class="dropdown-item" @click="createKeep()" title="Create Keep" aria-label="Create Keep">Create
+                Keep</button>
               <div class="dropdown-divider"></div>
-              <button class="dropdown-item" @click="createVault()" aria-label="Create Vault">Create Vault</button>
+              <button class="dropdown-item" @click="createVault()" title="Create Vault" aria-label="Create Vault">Create
+                Vault</button>
             </div>
           </li>
         </ul>
@@ -50,13 +54,14 @@
         </router-link>
       </div>
       <div class="w-100 d-flex justify-content-end align-items-center order-3">
-        <button class="btn mx-3" @click="toggleTheme" type="button" aria-label="Toggle dark mode">
+        <button class="btn mx-3" @click="toggleTheme" type="button" title="Toggle dark mode"
+          aria-label="Toggle dark mode">
           <i class="fs-3 mdi" :class="theme == 'light' ? 'mdi-weather-sunny text-dark' : 'mdi-weather-night'"></i>
         </button>
         <Login />
       </div>
       <button class="navbar-toggler order-4" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
-        aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation" title="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
     </span>

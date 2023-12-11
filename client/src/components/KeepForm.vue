@@ -6,7 +6,7 @@
     <div class="mb-3">
       <input v-model="formData.img" type="url" id="img" class="form-control" placeholder="Image URL..." required>
     </div>
-    <div class="mb-3">
+    <div v-if="false" class="mb-3">
       <input v-model="newTag.name" type="text" id="tags" class="form-control" placeholder="Tags...">
       <p class="tiny ms-3">* Separate tags with a comma</p>
       <span v-if="tags?.length > 0" class="d-flex flex-wrap mb-3">
@@ -15,7 +15,8 @@
     </div>
     <textarea v-model="formData.description" name="description" id="description" rows="5" required class="form-control"
       placeholder="Description..."></textarea>
-    <button class="btn btn-secondary mt-4 align-self-end" type="submit" aria-label="Create the Keep">Create</button>
+    <button class="btn btn-secondary mt-4 align-self-end" type="submit" title="Create the Keep"
+      aria-label="Create the Keep">Create</button>
   </form>
 </template>
 

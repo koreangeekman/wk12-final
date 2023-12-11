@@ -7,14 +7,16 @@
             <h1 class="modal-title fs-4 m-4" :id="modalId + 'Label'">
               <slot name="modalHeader">Modal title</slot>
             </h1>
-            <button type="button" class="btn-close m-4" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close m-4" data-bs-dismiss="modal" title="Close" aria-label="Close"></button>
           </span>
           <slot name="modalBody">Modal Body</slot>
         </div>
         <div v-if="showFooter" class="modal-footer">
           <slot name="modalFooter">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
-            <button type="button" class="btn btn-primary" aria-label="Save changes">Save changes</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" title="Close"
+              aria-label="Close">Close</button>
+            <button type="button" class="btn btn-primary" title="Save changes" aria-label="Save changes">Save
+              changes</button>
           </slot>
         </div>
       </div>

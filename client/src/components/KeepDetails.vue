@@ -32,11 +32,11 @@
                   {{ vault.name }} {{ vault.isPrivate ? '🔒' : '' }}
                 </option>
               </select>
-              <button class="btn btn-success shadow text-light px-2 mx-1" type="submit"
+              <button class="btn btn-success shadow text-light px-2 mx-1" type="submit" title="Add Keep to Vault"
                 aria-label="Add Keep to Vault">save</button>
             </form>
             <button v-else-if="account?.id" @click="createVault()" class="btn btn-secondary" type="button"
-              aria-label="Create a vault">create a vault</button>
+              title="Create a vault" aria-label="Create a vault">create a vault</button>
             <span class="d-flex align-items-center" @click.stop="openProfile(activeKeep.creatorId)" type="button">
               <img :src="activeKeep.creator.img" :alt="activeKeep.creator.name" :title="activeKeep.creator.name"
                 class="creator-img shadow mx-2">
