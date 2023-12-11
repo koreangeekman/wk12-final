@@ -27,7 +27,8 @@ class VaultsService {
   async getVaultsByProfileId(profileId) {
     AppState.vaults = [];
     const res = await api.get(`api/profiles/${profileId}/vaults`);
-    AppState.vaults = res.data.map(vault => new Vault(vault));
+    const vaults = res.data.map(vault => new Vault(vault));
+    AppState.vaults = vaults.sort((a, b) => b.id - a.id);
   }
 
   async createVault(vaultData) {
