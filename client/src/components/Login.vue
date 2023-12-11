@@ -68,4 +68,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+img {
+  background-color: var(--color-1);
+}
+</style>

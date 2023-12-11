@@ -114,6 +114,7 @@ export default {
 img {
   object-fit: cover;
   object-position: center;
+  background-color: var(--color-1);
 }
 
 .user-profile {

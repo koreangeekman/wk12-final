@@ -88,10 +88,11 @@ export default {
           selectedVault.value.keepId = this.activeKeep.id;
           await vaultKeepService.createVaultKeep(selectedVault.value);
           this.activeKeep.kept++;
+          Pop.success('Added keep to vault!')
         }
         catch (error) {
           if (error.response.data.includes('Duplicate')) {
-            Pop.error('Already saved')
+            Pop.error('Already saved to this vault')
           }
           Pop.error(error);
         }
