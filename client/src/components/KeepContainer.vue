@@ -1,7 +1,8 @@
 <template>
-  <div class="container-fluid px-0 px-lg-5">
-    <section class="row justify-content-center px-1 px-lg-5">
-      <div class="col-6 col-lg-4 col-xxl-3 py-3" v-for="keep in keeps" :key="keep.id">
+  <div class="px-0 px-xl-5">
+    <p class="mb-0 mt-3 py-2 fs-3 text-center app-font">ALL KEEPS</p>
+    <section class="masonry px-1 px-lg-5">
+      <div class="w-100 py-3" v-for="keep in keeps" :key="keep.id">
         <KeepCard :keep="keep" />
       </div>
     </section>
@@ -59,4 +60,14 @@ export default {
 </script>
 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.masonry {
+  columns: 15rem 2;
+}
+
+@media screen and (min-width: 768px) {
+  .masonry {
+    columns: 18rem;
+  }
+}
+</style>

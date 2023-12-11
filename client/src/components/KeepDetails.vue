@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid" v-if="activeKeep">
     <section class="row justify-content-center">
-      <div class="col-12 col-md-6 p-0">
+      <div class="col-12 col-md-6 p-0 d-flex">
         <img :src="activeKeep.img" :alt="activeKeep.name" class="keep-img">
       </div>
       <div class="col-12 col-md-6 py-4">
@@ -30,7 +30,7 @@
               <button class="btn btn-success shadow text-light px-2 mx-1" type="submit">save</button>
             </form>
             <button v-else class="btn btn-secondary" @click="createVault()">create a vault</button>
-            <span class="d-flex align-items-center" @click.stop="openProfile(keep.creatorId)">
+            <span class="d-flex align-items-center" @click.stop="openProfile(activeKeep.creatorId)" type="button">
               <img :src="activeKeep.creator.img" :alt="activeKeep.creator.name" class="creator-img shadow mx-2">
               <p class="mb-0 fw-bold d-none d-md-inline">{{ activeKeep.creator.name }}</p>
             </span>
@@ -48,9 +48,12 @@ import { Modal } from "bootstrap";
 import { AppState } from '../AppState.js';
 import { computed, onMounted, ref } from 'vue';
 import { vaultsService } from "../services/VaultsService.js";
+import { useRouter } from "vue-router";
 
 export default {
   setup() {
+    const router = useRouter();
+
     const ogVault = ref('');
 
     async function _getMyVaults() {
@@ -71,6 +74,7 @@ export default {
         Modal.getOrCreateInstance('#createVault').show();
       },
       openProfile(profileId) {
+        Modal.getOrCreateInstance('#keepDetail').hide();
         router.push({ name: 'Profile', params: { profileId } })
       }
     }
@@ -80,6 +84,10 @@ export default {
 
 
 <style lang="scss" scoped>
+.image {
+  height: 50%;
+}
+
 .keep-img {
   object-fit: cover;
   object-position: center;

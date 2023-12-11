@@ -5,7 +5,7 @@ import { api } from "./AxiosService.js";
 
 class KeepsService {
 
-  setActiveKeep(keep) { AppState.activeKeep = keep; }
+  setActiveKeep(keepObj) { AppState.activeKeep = keepObj; }
 
   async getKeeps() {
     AppState.keeps = [];
