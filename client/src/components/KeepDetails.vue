@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid" v-if="activeKeep">
+  <div class="container-fluid overflow-hidden" v-if="activeKeep">
     <section class="row justify-content-center">
       <div class="col-12 col-md-6 p-0 d-flex">
         <img :src="activeKeep.img" :alt="activeKeep.name" class="keep-img">
@@ -38,7 +38,7 @@
             <button v-else-if="account?.id" @click="createVault()" class="btn btn-secondary" type="button"
               title="Create a vault" aria-label="Create a vault">create a vault</button>
             <span class="d-flex align-items-center" @click.stop="openProfile(activeKeep.creatorId)" type="button">
-              <img :src="activeKeep.creator.img" :alt="activeKeep.creator.name" :title="activeKeep.creator.name"
+              <img :src="activeKeep.creator.picture" :alt="activeKeep.creator.name" :title="activeKeep.creator.name"
                 class="creator-img shadow mx-2">
               <p class="mb-0 fw-bold d-none d-md-inline">{{ activeKeep.creator.name.split('@')[0] }}</p>
             </span>

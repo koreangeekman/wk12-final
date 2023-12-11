@@ -63,7 +63,8 @@ export default {
   line-height: 2.5rem;
   transition: .25s;
   font-size: larger;
-  opacity: .5;
+  opacity: .8;
+  text-shadow: 0 0 .42rem var(--color-1);
 }
 
 .deleteMe:hover {

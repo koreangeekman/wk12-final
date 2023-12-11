@@ -87,6 +87,9 @@ main {
 
 .light-shadow {
   text-shadow: 0 0 .25rem var(--color-6);
+  background-color: #80808099;
+  backdrop-filter: blur(4px);
+  color: white !important;
 }
 
 // https://dev.to/xtrp/how-to-create-a-beautiful-custom-scrollbar-for-your-site-in-plain-css-1mjg

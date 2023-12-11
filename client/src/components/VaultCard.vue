@@ -49,7 +49,7 @@ p {
 }
 
 .mdi-lock {
-  text-shadow: 0 0 1rem var(--color-1);
+  text-shadow: 0 0 1.5rem var(--color-1);
 }
 
 .vault-card {
@@ -75,12 +75,6 @@ p {
 .vault-info {
   left: 0;
   bottom: 0;
-}
-
-
-.light-shadow {
-  background-color: #80808080;
-  backdrop-filter: blur(2px);
 }
 
 .creator-img {

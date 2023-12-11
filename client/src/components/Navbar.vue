@@ -46,7 +46,7 @@
 
       <div class="w-100 d-flex justify-content-md-center order-1 order-md-2">
         <router-link class="navbar-brand d-flex" :to="{ name: 'Keeps' }">
-          <p class="mb-0 px-1 rounded app-name app-logo app-font">
+          <p class="mb-0 px-1 rounded app-name app-logo app-font" title="Logo & link to home page">
             the <br>
             keepr <br>
             co.

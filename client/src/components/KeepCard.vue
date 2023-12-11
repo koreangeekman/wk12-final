@@ -81,11 +81,6 @@ p {
   bottom: 0;
 }
 
-.light-shadow {
-  background-color: #80808080;
-  backdrop-filter: blur(2px);
-}
-
 .creator-img {
   border-radius: 50%;
   aspect-ratio: 1/1;
