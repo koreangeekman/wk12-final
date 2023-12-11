@@ -20,6 +20,11 @@ class AccountService {
     AppState.activeProfile = new Profile(res.data);
   }
 
+  async updateProfile(profileData) {
+    const res = await api.put('/account', profileData);
+    AppState.activeProfile = new Profile(res.data);
+  }
+
 }
 
 export const accountService = new AccountService()

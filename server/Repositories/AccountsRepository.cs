@@ -38,7 +38,12 @@ public class AccountsRepository
             UPDATE accounts
             SET 
               name = @Name,
-              picture = @Picture
+              picture = @Picture,
+              coverImg = @CoverImg,
+              website = @Website,
+              github = @Github,
+              linkedin = @Linkedin,
+              bio = @Bio
             WHERE id = @Id;";
     _db.Execute(sql, update);
     return update;

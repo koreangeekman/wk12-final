@@ -7,11 +7,23 @@
         </div>
         <div class="position-relative d-flex justify-content-center">
           <div class="position-absolute d-block text-center user-profile">
+            <span class="hidden">
+              <p class="pt-3">{{ activeProfile.bio }}</p>
+              <div class="fs-1 socials d-flex justify-content-center p-3 mb-3">
+                <a :href="activeProfile.github" target="_blank"><i class="p-3 mdi mdi-github"
+                    title="icon for github"></i></a>
+                <a :href="activeProfile.linkedin" target="_blank"><i class="p-3 mdi mdi-linkedin"
+                    title="icon for linked"></i></a>
+                <a :href="activeProfile.website" target="_blank"><i class="p-3 mdi mdi-web"
+                    title="icon for the user's website"></i></a>
+              </div>
+            </span>
             <img :src="activeProfile.picture" :alt="activeProfile.name" class="user-image">
             <p class="fs-1 mb-0"> {{ activeProfile.name }} </p>
-            <p class="mb-0"> {{ }} </p>
           </div>
-          <div class="position-absolute user-edit" v-if="route.name == 'Account'">
+          <div class="position-absolute d-block text-center user-profile">
+          </div>
+          <div class="position-absolute user-edit" v-if="route.name == 'Account' || account.id == activeProfile.id">
             <i class="fs-1 mdi mdi-dots-horizontal btn selectable py-0 my-2" @click="editAccount()"></i>
           </div>
         </div>
@@ -42,6 +54,7 @@
   <span>
     <ModalComponent :modalId="'editAccount'" :modalSize="'modal-xl'" :showHeader="false">
       <template #modalBody>
+        <AccountForm />
       </template>
     </ModalComponent>
   </span>
@@ -57,6 +70,7 @@ import { accountService } from "../services/AccountService.js";
 import KeepContainer from "../components/KeepContainer.vue";
 import VaultContainer from "../components/VaultContainer.vue";
 import ModalComponent from "../components/ModalComponent.vue";
+import AccountForm from "../components/AccountForm.vue";
 
 export default {
   setup() {
@@ -76,6 +90,7 @@ export default {
     return {
       route,
       defaultImg: 'https://images.unsplash.com/photo-1663947718652-fa32fb546da2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0MHx8fGVufDB8fHx8fA%3D%3D',
+      account: computed(() => AppState.account),
       activeProfile: computed(() => AppState.activeProfile),
       vaults: computed(() => AppState.vaults),
       keeps: computed(() => AppState.keeps),
@@ -84,7 +99,7 @@ export default {
       }
     };
   },
-  components: { VaultContainer, KeepContainer, ModalComponent }
+  components: { VaultContainer, KeepContainer, ModalComponent, AccountForm }
 }
 </script>
 
@@ -116,5 +131,15 @@ img {
   max-height: 25rem;
   object-fit: cover;
   object-position: center;
+}
+
+.hidden {
+  opacity: 0;
+  transition: .25s;
+  text-shadow: 0 0 1rem var(--color-1);
+}
+
+.hidden:hover {
+  opacity: 1;
 }
 </style>
