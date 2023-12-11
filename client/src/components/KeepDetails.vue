@@ -23,7 +23,7 @@
           <div class="col-12 d-flex justify-content-between align-items-center px-4 py-1">
             <button v-if="route.name == 'VaultDetails' && account?.id == activeVault?.creatorId" class="btn btn-secondary"
               @click="removeFromVault()">
-              <i class="mdi mdi-cancel mdi-rotate-90"></i> Remove
+              <i class="mdi mdi-cancel mdi-rotate-90"></i> Remove from vault
             </button>
             <form v-else-if="(account?.id && myVaults?.length > 0)" @submit.prevent="addKeepToVault()"
               class="d-flex mx-3">
