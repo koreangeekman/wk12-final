@@ -101,6 +101,8 @@ export default {
       },
       async removeFromVault() {
         try {
+          const yes = await Pop.confirm('Remove this keep from the current vault?');
+          if (!yes) { return }
           await vaultKeepService.deleteVaultKeep(this.activeKeep.vaultKeepId)
           Modal.getInstance('#keepDetail').hide();
         }

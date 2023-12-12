@@ -83,7 +83,7 @@ import { router } from "../router";
 export default {
   setup() {
     const route = useRoute();
-    const watchRoute = computed(() => route.name);
+    const watchRouteName = computed(() => route.name);
     const watchProfileId = computed(() => route.params.profileId);
     async function _setProfile() {
       try {
@@ -100,8 +100,7 @@ export default {
       }
       catch (error) { Pop.error(error); }
     }
-    watch(watchRoute, _setProfile, { immediate: true })
-    watch(watchProfileId, _setProfile, { immediate: true })
+    watch([watchRouteName, watchProfileId], _setProfile, { immediate: true })
     return {
       route,
       defaultImg: 'https://images.unsplash.com/photo-1663947718652-fa32fb546da2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0MHx8fGVufDB8fHx8fA%3D%3D',

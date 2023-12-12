@@ -59,12 +59,17 @@ export default {
 .deleteMe {
   top: .2rem;
   right: .2rem;
-  aspect-ratio: 1/1;
   line-height: 2.5rem;
   transition: .25s;
   font-size: larger;
   opacity: .8;
-  text-shadow: 0 0 .42rem var(--color-1);
+  box-shadow:
+    0 0 8px yellow,
+    0 0 8px white inset;
+  text-shadow: 0 0 1rem white;
+  height: 2.5rem;
+  width: 2.5rem;
+  text-align: center;
 }
 
 .deleteMe:hover {
