@@ -27,13 +27,13 @@ public class VaultKeepsController : ControllerBase
   }
 
   [Authorize]
-  [HttpDelete("{vaultId}")]
-  public async Task<ActionResult<VaultKeep>> DeleteVaultKeep(int vaultId)
+  [HttpDelete("{vaultKeepId}")]
+  public async Task<ActionResult<VaultKeep>> DeleteVaultKeep(int vaultKeepId)
   {
     try
     {
       Account userInfo = await a0.GetUserInfoAsync<Account>(HttpContext);
-      return Ok(vaultKeepsService.DeleteVaultKeep(userInfo.Id, vaultId));
+      return Ok(vaultKeepsService.DeleteVaultKeep(userInfo.Id, vaultKeepId));
     }
     catch (Exception e) { return BadRequest(e.Message); }
   }

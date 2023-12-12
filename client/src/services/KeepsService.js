@@ -13,10 +13,11 @@ class KeepsService {
     AppState.keeps = (res.data.map(keep => new Keep(keep))).sort((a, b) => b.id - a.id);
   }
 
-  async getKeepById(keepId) {
+  async getKeepById(keepId, vkId) {
     AppState.activeKeep = null;
     const res = await api.get('api/keeps/' + keepId);
     AppState.activeKeep = new Keep(res.data);
+    AppState.activeKeep.vaultKeepId = vkId;
   }
 
   async getKeepsByProfileId(profileId) {

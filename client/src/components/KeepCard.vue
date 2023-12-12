@@ -1,6 +1,6 @@
 <template>
   <div class="position-relative">
-    <div class="keep-card selectable" @click="openKeepDetails(keep)">
+    <div class="keep-card selectable" @click="openKeepDetails()">
       <img class="keep-img rounded" :src="keep.img" :alt="keep.name">
       <span class="keep-info d-flex align-items-center justify-content-between w-100 py-2 px-md-2 position-absolute">
         <p class="fs-5 mb-0 ms-1 p-1 rounded app-font light-shadow">{{ keep.name }}</p>
@@ -27,17 +27,17 @@ export default {
   setup(props) {
     const route = useRoute();
     const router = useRouter();
-    async function _getKeepById(keepId) {
-      try { await keepsService.getKeepById(keepId); }
+    async function _getKeepById(keepId, vkId) {
+      try { await keepsService.getKeepById(keepId, vkId); }
       catch (error) { Pop.error(error); }
     }
     return {
       route,
-      async openKeepDetails(keepObj) {
+      async openKeepDetails() {
         try {
           // vaultKeepService.setVault();
           // keepsService.setActiveKeep(keepObj);
-          await _getKeepById(props.keep.id);
+          await _getKeepById(props.keep.id, props.keep.vaultKeepId);
           Modal.getOrCreateInstance('#keepDetail').show();
         }
         catch (error) { Pop.error(error); }

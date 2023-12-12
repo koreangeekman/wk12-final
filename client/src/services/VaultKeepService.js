@@ -19,7 +19,8 @@ class VaultKeepService {
   async deleteVaultKeep(vkId) {
     const res = await api.delete('api/vaultkeeps/' + vkId);
     // AppState.myVaultKeeps = AppState.myVaultKeeps.filter(vk => vk.id != vkId);
-    logger.log('Vault-Keep association deleted..', res.data)
+    logger.log(res.data) // 'Vault-Keep association has been permanently deleted'
+    AppState.keeps = AppState.keeps.filter(k => k.vaultKeepId != vkId);
   }
 }
 

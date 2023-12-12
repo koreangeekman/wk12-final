@@ -13,8 +13,8 @@ public class VaultsService
 
   internal Vault GetVaultById(string creatorId, int vaultId)
   {
-    Vault vault = vaultsRepo.GetVaultById(vaultId) ?? throw new Exception("Unable to locate by Id: " + vaultId);
-    if (vault.IsPrivate == true && vault.CreatorId != creatorId) { throw new Exception("Unable to locate by Id:: " + vaultId); }
+    Vault vault = vaultsRepo.GetVaultById(vaultId) ?? throw new Exception("Unable to locate Vault by Id: " + vaultId);
+    if (vault.IsPrivate == true && vault.CreatorId != creatorId) { throw new Exception("Unable to locate Vault by Id:: " + vaultId); }
     return vault;
   }
 
@@ -37,7 +37,7 @@ public class VaultsService
   internal Vault EditVault(Vault vaultData)
   {
     Vault vault = GetVaultById(vaultData.CreatorId, vaultData.Id);
-    if (vault.CreatorId != vaultData.CreatorId) { throw new Exception("Forbidden action: Not yours to edit"); }
+    if (vault.CreatorId != vaultData.CreatorId) { throw new Exception("Forbidden action: Not your Vault to edit"); }
     vault.Name = vaultData.Name ?? vault.Name;
     vault.Description = vaultData.Description ?? vault.Description;
     vault.Img = vaultData.Img ?? vault.Img;
@@ -48,7 +48,7 @@ public class VaultsService
   internal string DeleteVault(string creatorId, int vaultId)
   {
     Vault vault = GetVaultById(creatorId, vaultId);
-    if (vault.CreatorId != creatorId) { throw new Exception("Forbidden action: Not yours to delete"); }
+    if (vault.CreatorId != creatorId) { throw new Exception("Forbidden action: Not your Vault to delete"); }
     vaultsRepo.DeleteVault(vaultId);
     return "Vault has been permanently deleted";
   }

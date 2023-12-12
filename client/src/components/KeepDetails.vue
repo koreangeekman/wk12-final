@@ -54,7 +54,7 @@
 import Pop from "../utils/Pop";
 import { Modal } from "bootstrap";
 import { AppState } from '../AppState.js';
-import { computed, onMounted, ref, watchEffect } from 'vue';
+import { computed, ref } from 'vue';
 import { useRoute, useRouter } from "vue-router";
 import { vaultKeepService } from "../services/VaultKeepService.js";
 
@@ -100,7 +100,10 @@ export default {
         }
       },
       async removeFromVault() {
-        try { await vaultKeepService.deleteVaultKeep(this.activeKeep.vaultKeepId) }
+        try {
+          await vaultKeepService.deleteVaultKeep(this.activeKeep.vaultKeepId)
+          Modal.getInstance('#keepDetail').hide();
+        }
         catch (error) { Pop.error(error); }
       }
     }

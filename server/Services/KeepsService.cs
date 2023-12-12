@@ -17,7 +17,7 @@ public class KeepsService
 
   internal Keep GetKeepById(int keepId, bool alterKeep, string creatorId)
   {
-    Keep keep = keepsRepo.GetKeepById(keepId) ?? throw new Exception("Unable to locate by Id: " + keepId);
+    Keep keep = keepsRepo.GetKeepById(keepId) ?? throw new Exception("Unable to locate Keep by Id: " + keepId);
     if (alterKeep) { return keep; }
     if (keep.Views > 0 && keep.CreatorId == creatorId) { return keep; }
     keep = AddView(keep);
@@ -30,7 +30,7 @@ public class KeepsService
   internal Keep EditKeep(Keep keepData)
   {
     Keep keep = GetKeepById(keepData.Id, true, keepData.CreatorId);
-    if (keep.CreatorId != keepData.CreatorId) { throw new Exception("Forbidden action: Not yours to edit"); }
+    if (keep.CreatorId != keepData.CreatorId) { throw new Exception("Forbidden action: Not your Keep to edit"); }
     keep.Name = keepData.Name ?? keep.Name;
     keep.Description = keepData.Description ?? keep.Description;
     keep.Img = keepData.Img ?? keep.Img;
@@ -40,7 +40,7 @@ public class KeepsService
   internal string DeleteKeep(string creatorId, int keepId)
   {
     Keep keep = GetKeepById(keepId, true, creatorId);
-    if (keep.CreatorId != creatorId) { throw new Exception("Forbidden action: Not yours to delete"); }
+    if (keep.CreatorId != creatorId) { throw new Exception("Forbidden action: Not your Keep to delete"); }
     keepsRepo.DeleteKeep(keepId);
     return "Keep has been permanently deleted";
   }
