@@ -115,6 +115,9 @@ export default {
 
 
 <style lang="scss" scoped>
+.app-font{
+  line-height: 2.5rem;
+}
 .image {
   height: 50%;
 }
