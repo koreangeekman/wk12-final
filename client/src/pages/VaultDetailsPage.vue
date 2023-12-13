@@ -9,7 +9,7 @@
             <p class="mb-0 fs-5">by {{ activeVault.creator.name }}</p>
           </div>
           <div class="position-absolute vault-edit"
-            v-if="false && route.name == 'VaultDetails' && activeVault.creatorId == account.id">
+            v-if="false && route.name == 'VaultDetails' && activeVault?.creatorId == account.id">
             <i class="fs-5 mdi mdi-dots-horizontal rounded selectable px-1" title="Edit Vault"></i>
           </div>
         </div>
