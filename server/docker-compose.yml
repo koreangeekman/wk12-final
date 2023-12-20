@@ -3,6 +3,6 @@ services:
   app:
     image: koreangeekman/keepr:latest
     env_file:
-      - keepr_env
+      - keepr-env
     ports:
       - "7045:80"
