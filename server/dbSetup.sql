@@ -1,3 +1,5 @@
+-- Active: 1703085620939@@34.213.246.130@3306@keepr
+
 CREATE TABLE
     IF NOT EXISTS accounts(
         id VARCHAR(255) NOT NULL primary key COMMENT 'primary key',
