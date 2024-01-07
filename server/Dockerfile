@@ -25,7 +25,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine-arm64v8 AS build-env-arm64
 WORKDIR /app/server
 
 # Copy the .NET package references file
-COPY server/*.csproj ./
+COPY server/keepr.csproj ./
 
 # "Rebuild" the .NET env
 RUN dotnet restore
