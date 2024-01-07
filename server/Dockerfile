@@ -1,7 +1,3 @@
-
-# Clear NuGet cache directories
-RUN dotnet nuget locals all --clear
-
 # Stage 1: Build the client side using Node as the base image
 FROM node:20-slim AS client-builder
 
@@ -27,6 +23,9 @@ RUN npm run build
 # FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build-env-amd64
 # Stage 3: Build the server for arm64
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
+
+# Clear NuGet cache directories
+RUN dotnet nuget locals all --clear
 
 WORKDIR /app/server
 
