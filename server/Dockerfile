@@ -18,7 +18,9 @@ RUN npm run build
 
 
 # Stage 2: Build the server using .NET SDK for amd64
-FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build-env-amd64
+# FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build-env-amd64
+# Stage 3: Build the server for arm64
+FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine-arm64v8 AS build-env-arm64
 
 WORKDIR /app/server
 
@@ -40,27 +42,11 @@ COPY --from=client-builder /app/client/docs /app/server/wwwroot
 RUN dotnet publish -c Release -o out
 
 
-# Stage 3: Build the server for arm64
-FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine-arm64v8 AS build-env-arm64
-
-WORKDIR /app/server
-
-COPY server/*.csproj ./
-RUN dotnet restore
-
-COPY server ./
-COPY --from=client-builder /app/client/docs /app/server/wwwroot
-
-# Specify architecture-specific build commands for arm64 if necessary
-
-RUN dotnet publish -c Release -o out-arm64
-
-
 # Stage 4: Final runtime image
-FROM mcr.microsoft.com/dotnet/aspnet:8.0-alpine
+FROM mcr.microsoft.com/dotnet/aspnet:8.0-alpine-arm64v8
 
 WORKDIR /app
 COPY --from=build-env-amd64 /app/server/out .
-COPY --from=build-env-arm64 /app/server/out-arm64 ./out-arm64
+# COPY --from=build-env-arm64 /app/server/out-arm64 ./out-arm64
 
 CMD ASPNETCORE_URLS=http://*:$PORT dotnet keepr.dll
