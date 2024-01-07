@@ -41,7 +41,7 @@ RUN dotnet publish -c Release -o out
 
 
 # Stage 3: Build the server for arm64
-FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine-composite-arm64v8 AS build-env-arm64
+FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine-arm64v8 AS build-env-arm64
 
 WORKDIR /app/server
 
@@ -57,7 +57,7 @@ RUN dotnet publish -c Release -o out-arm64
 
 
 # Stage 4: Final runtime image
-FROM mcr.microsoft.com/dotnet/aspnet:8.0-alpine-composite
+FROM mcr.microsoft.com/dotnet/aspnet:8.0-alpine
 
 WORKDIR /app
 COPY --from=build-env-amd64 /app/server/out .
