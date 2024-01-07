@@ -1,3 +1,7 @@
+
+# Clear NuGet cache directories
+RUN dotnet nuget locals all --clear
+
 # Stage 1: Build the client side using Node as the base image
 FROM node:20-slim AS client-builder
 
@@ -22,18 +26,15 @@ RUN npm run build
 # Stage 2: Build the server using .NET SDK for amd64
 # FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build-env-amd64
 # Stage 3: Build the server for arm64
-FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine-arm64v8 AS build-env-arm64
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
 
 WORKDIR /app/server
 
 # Copy the .NET package references file
 COPY server/keepr.csproj ./
 
-# Clear NuGet cache directories
-RUN dotnet nuget locals all --clear
-
 # "Rebuild" the .NET env
-RUN dotnet restore
+RUN dotnet restore -v detailed
 
 # Copy the backend contents into the image
 COPY server ./
@@ -51,7 +52,7 @@ RUN dotnet publish -c Release -r linux-arm64 -o out
 FROM mcr.microsoft.com/dotnet/aspnet:8.0-alpine-arm64v8
 
 WORKDIR /app
-COPY --from=build-env-arm64 /app/server/out .
+COPY --from=build-env /app/server/out .
 # COPY --from=build-env-amd64 /app/server/out-amd64 ./out-amd64
 # COPY --from=build-env-arm64 /app/server/out-arm64 ./out-arm64
 
