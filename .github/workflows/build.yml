@@ -21,9 +21,9 @@ jobs:
       - name: Set up Docker Buildx 
         uses: docker/setup-buildx-action@v3
 
-      # - name: Install quemu emulators
-      #   run: |
-      #     docker run -td --rm --privileged tonistiigi/binfmt --install all
+      - name: Install quemu emulators
+        run: |
+          docker run -td --rm --privileged tonistiigi/binfmt --install all
 
       - name: Build and Push Docker Image 🐋
         run: |
