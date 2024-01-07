@@ -5,7 +5,9 @@ FROM node:20-slim AS client-builder
 WORKDIR /app/client
 
 # Copy the client-side package.json and package-lock.json to the client builder container
-COPY client/package*.json ./
+# Copied separately to reinforce cache validation depicting no change from last build [iirc?]
+COPY client/package.json ./
+COPY client/package-lock.json ./
 
 # Install client application dependencies
 RUN npm install
@@ -39,7 +41,7 @@ COPY --from=client-builder /app/client/docs /app/server/wwwroot
 # Specify architecture-specific build commands for amd64 if necessary
 
 # Build and publish a release
-RUN dotnet publish -c Release -o out
+RUN dotnet publish -c Release -r linux-arm64 -o out
 
 
 # Stage 4: Final runtime image
