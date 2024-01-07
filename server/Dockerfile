@@ -29,6 +29,9 @@ WORKDIR /app/server
 # Copy the .NET package references file
 COPY server/keepr.csproj ./
 
+# Clear NuGet cache directories
+RUN dotnet nuget locals all --clear
+
 # "Rebuild" the .NET env
 RUN dotnet restore
 
