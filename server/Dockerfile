@@ -22,7 +22,7 @@ RUN npm run build
 # Stage 2: Build the server using .NET SDK for amd64
 # FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build-env-amd64
 # Stage 3: Build the server for arm64
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
+FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine-arm64v8 AS build-env
 
 # Clear NuGet cache directories
 RUN dotnet nuget locals all --clear
@@ -30,13 +30,13 @@ RUN dotnet nuget locals all --clear
 WORKDIR /app/server
 
 # Copy the .NET package references file
-COPY server/keepr.csproj ./
+COPY server/keepr.csproj .
 
 # "Rebuild" the .NET env
 RUN dotnet restore -v detailed
 
 # Copy the backend contents into the image
-COPY server ./
+COPY server .
 
 # Copy the frontend contents into the image
 COPY --from=client-builder /app/client/docs /app/server/wwwroot
