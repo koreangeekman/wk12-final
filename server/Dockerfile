@@ -18,6 +18,11 @@ RUN npm run build
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine-amd64 AS build-env
 
+ARG TARGETARCH
+ARG BUILDPLATFORM
+RUN echo "Target: $TARGETARCH"
+RUN echo "Build: $BUILDPLATFORM"
+
 WORKDIR /app/server
 
 # Copy everything
@@ -34,6 +39,11 @@ RUN dotnet publish -c Release -o out
 
 # Start runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0-alpine
+
+ARG TARGETARCH
+ARG BUILDPLATFORM
+RUN echo "Target: $TARGETARCH"
+RUN echo "Build: $BUILDPLATFORM"
 
 WORKDIR /app
 COPY --from=build-env /app/server/out .
