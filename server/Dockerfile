@@ -16,12 +16,8 @@ COPY client ./
 # Build the client-side code
 RUN npm run build
 
+# Manually specify an amd64 build environment for the dotnet restore to complete
 FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine-amd64 AS build-env
-
-ARG TARGETARCH
-ARG BUILDPLATFORM
-RUN echo "Target: $TARGETARCH"
-RUN echo "Build: $BUILDPLATFORM"
 
 WORKDIR /app/server
 
@@ -37,14 +33,8 @@ COPY --from=client-builder /app/client/docs /app/server/wwwroot
 # Build and publish a release
 RUN dotnet publish -c Release -o out
 
-# Start runtime image
+# Start runtime image with generic multi-arch image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0-alpine
-
-ARG TARGETARCH
-ARG BUILDPLATFORM
-RUN echo "Target: $TARGETARCH"
-RUN echo "Build: $BUILDPLATFORM"
-
 WORKDIR /app
 COPY --from=build-env /app/server/out .
 CMD ASPNETCORE_URLS=http://*:$PORT dotnet keepr.dll
