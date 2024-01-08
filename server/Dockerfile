@@ -16,7 +16,7 @@ COPY client ./
 # Build the client-side code
 RUN npm run build
 
-FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build-env
+FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine-amd64 AS build-env
 
 WORKDIR /app/server
 
@@ -34,6 +34,7 @@ RUN dotnet publish -c Release -o out
 
 # Start runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0-alpine
+
 WORKDIR /app
 COPY --from=build-env /app/server/out .
 CMD ASPNETCORE_URLS=http://*:$PORT dotnet keepr.dll
