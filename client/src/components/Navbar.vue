@@ -54,10 +54,10 @@
         </router-link>
       </div>
       <div class="w-100 d-flex justify-content-end align-items-center order-3">
-        <button class="btn mx-3" @click="toggleTheme" type="button" title="Toggle dark mode"
+        <!-- <button class="btn mx-3" @click="toggleTheme" type="button" title="Toggle dark mode"
           aria-label="Toggle dark mode">
           <i class="fs-3 mdi" :class="theme == 'light' ? 'mdi-weather-sunny text-dark' : 'mdi-weather-night'"></i>
-        </button>
+        </button> -->
         <Login />
       </div>
       <button class="navbar-toggler order-4" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
