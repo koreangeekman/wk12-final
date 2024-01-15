@@ -43,6 +43,8 @@ class VaultsService {
   async deleteVault(vaultId) {
     const res = await api.delete('api/vaults/' + vaultId);
     AppState.vaults = AppState.vaults.filter(vault => vault.id != vaultId);
+    AppState.myVaults = AppState.myVaults.filter(vault => vault.id != vaultId);
+    // TODO Test remove vaults from myVaults selection list when deleted
     logger.log('Vault deletion result:', res.data);
   }
 
